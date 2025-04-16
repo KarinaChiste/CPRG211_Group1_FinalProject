@@ -13,11 +13,11 @@ namespace CPRG211_Group1_FinalProject.Classes
         public string EmployeeLastName { get; set; }
         public string Position { get; set; }
 
-        public double Salary { get; set; }
+        public string Salary { get; set; }
         public string StartDate { get; set; }
-        public double Hours { get; set; }
+        public string Hours { get; set; }
 
-        public Employee(string employeeId, string employeeFirstName, string employeeLastName, string position, double salary, string startDate, double hours)
+        public Employee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours)
         {
             EmployeeId = employeeId;
             EmployeeFirstName = employeeFirstName;
@@ -26,6 +26,11 @@ namespace CPRG211_Group1_FinalProject.Classes
             Salary = salary;
             StartDate = startDate;
             Hours = hours;
+        }
+
+        public override string ToString()
+        {
+            return $"{EmployeeId},{EmployeeFirstName},{EmployeeLastName},{Position},{Salary},{StartDate},{Hours}";
         }
     }
 }
