@@ -39,7 +39,7 @@
 	<input type="text" placeholder="Hours" style="width:50%" @bind="hours"/>
 </div>
 
-<div class=" flex-grow-1" style="width: 190px;">
+<div class=" flex-grow-1" style="width: 190px;margin-bottom:30px">
 	<button type="button" class="btn btn-primary w-100"
 	style="white-space: nowrap;" @onclick="MakeEmployee">
 		Add Employee
@@ -60,8 +60,16 @@
 
 	public void MakeEmployee()
 	{
-		Employee employee = new Employee(employeeid, firstname, lastname, position, salary, startdate, hours);
-		EmployeeManager.employees.Add(employee);
-		success = "Employee added";
+		try
+		{
+			Employee employee = new Employee(employeeid, firstname, lastname, position, salary, startdate, hours);
+			EmployeeManager.employees.Add(employee);
+			success = "Employee added";
+		}
+		catch(Exception ex)
+		{
+			success = ex.Message;
+		}
+
 	}
 }
