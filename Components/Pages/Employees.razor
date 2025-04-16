@@ -1,0 +1,171 @@
+﻿@page "/employees"
+@using CPRG211_Group1_FinalProject.Classes
+<h3>Employees</h3>
+
+<form class="d-flex gap-4">
+	<div style="width: 30%">
+		<label> Employee ID: </label>
+		<input type="text" @bind="id" />
+	</div>
+	<div style="width: 30%" >
+		<label> First Name: </label>
+		<input type="text" @bind="employeefirstname"/>
+	</div>
+	<div style="width:30%">
+		<label> Last Name: </label>
+		<input type="text" @bind="employeelastname" />
+	</div>
+	<div class="align-self-end flex-grow-1" style="width: 190px;">
+		<button type="button" class="btn btn-primary w-100"
+		style="white-space: nowrap;" @onclick="FindEmployees">
+			Find Employee
+		</button>
+	</div>
+
+</form>
+
+@* dropdown list *@
+<div class="form-group">
+	<select class="form-select" @onchange="EmployeeClick">
+
+		@foreach (Employee employee in employees)
+		{
+			if (chosenEmployee == 1)
+			{
+				<option selected value="@employee"> @employee.ToString() </option>
+			}
+			else
+			{
+				<option value="@employee">@employee.ToString()</option>
+			}
+		}
+
+	</select>
+</div>
+
+@* employee info *@
+<div style="padding-top:10px">
+	<label>Employee ID: </label> <br />
+	<input type="text" placeholder="Employee ID" style="width:50%" readonly	 value="@employeeid"/>
+
+</div>
+
+<div style="padding-top:10px">
+	<label>First Name: </label> <br />
+	<input type="text" placeholder="First Name" style="width:50%" readonly value="@firstname" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Last Name: </label> <br />
+	<input type="text" placeholder="Last Name" style="width:50%" readonly value="@lastname" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Position: </label> <br />
+	<input type="text" placeholder="Position" style="width:50%" readonly  value="@position"/>
+</div>
+
+<div style="padding-top:10px">
+	<label>Salary: </label> <br />
+	<input type="text" placeholder="Salary" style="width:50%" readonly value="@salary"/>
+</div>
+
+<div style="padding-top:10px">
+	<label>Start Date: </label> <br />
+	<input type="text" placeholder="Start Date" style="width:50%" readonly value="@startdate" />
+</div>
+
+<div style="padding-top:10px; padding-bottom:20px">
+	<label>Hours: </label> <br />
+	<input type="text" placeholder="Hours" style="width:50%" readonly value="@hours"/>
+</div>
+
+@* buttons *@
+
+<form class="d-flex gap-4">
+
+	<a href="/addemployees">
+		<button type="button" class="btn btn-primary w-100"
+		style="white-space: nowrap; ">
+			Add Employee
+		</button>
+	</a>
+
+	<a href="/addemployees">
+		<button type="button" class="btn btn-primary w-100"
+		style="white-space: nowrap; ">
+			Edit Employee
+		</button>
+	</a>
+
+	<button type="button" class="btn btn-primary w-100"
+	style="white-space: nowrap;">
+		Remove Employee
+	</button>
+</form>
+
+
+
+@code {
+
+	private string id;
+	private string employeefirstname;
+	private string employeelastname;
+
+	private string employeeid;
+	private string firstname;
+	private string lastname;
+	private string position;
+	private string startdate;
+	private string salary;
+	private string hours;
+
+	public int chosenEmployee = 1;
+	public string[] employeeDetails;
+
+	private List<Employee> employees = new List<Employee>();
+	private EmployeeManager employeeManager = new EmployeeManager();
+
+	private void FindEmployees()
+	{
+		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(employeelastname))
+		{
+			employees.Clear();
+			return;
+		}
+		employees = EmployeeManager.GetEmployees().Where(item =>
+				(string.IsNullOrWhiteSpace(id) || item.EmployeeId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
+						(string.IsNullOrWhiteSpace(employeefirstname) || item.EmployeeFirstName.Equals(employeefirstname, StringComparison.OrdinalIgnoreCase)) &&
+						(string.IsNullOrWhiteSpace(employeelastname) || item.EmployeeLastName.Equals(employeelastname, StringComparison.OrdinalIgnoreCase))
+						).ToList();
+		if(employees.Count != 0)
+		{
+			EmployeeSet(employees[employees.Count - 1].ToString());
+		}
+	}
+
+	public void EmployeeClick(ChangeEventArgs arg1)
+	{
+		if(arg1.Value is not null)
+		{
+			string myEmployee = (string)arg1.Value;
+			EmployeeSet(myEmployee);
+		}
+	}
+
+	public void EmployeeSet(string theEmployee)
+	{
+		if(theEmployee.Length != 0)
+		{
+			employeeDetails = theEmployee.Split(",");
+			employeeid = employeeDetails[0];
+			firstname = employeeDetails[1];
+			lastname = employeeDetails[2];
+			position = employeeDetails[3];
+			salary = employeeDetails[4];
+			startdate = employeeDetails[5];
+			hours = employeeDetails[6];
+		}
+	}
+
+}

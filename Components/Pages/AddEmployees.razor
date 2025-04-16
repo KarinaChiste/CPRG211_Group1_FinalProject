@@ -1,0 +1,67 @@
+﻿@page "/addemployees"
+@using CPRG211_Group1_FinalProject.Classes
+
+<h3>Add New Employee</h3>
+
+<div style="padding-top:10px">
+	<label>Employee ID: </label> <br />
+	<input type="text" placeholder="Employee ID" style="width:50%" @bind="employeeid" 	/>
+
+</div>
+
+<div style="padding-top:10px">
+	<label>First Name: </label> <br />
+	<input type="text" placeholder="First Name" style="width:50%"  @bind="firstname"/>
+</div>
+
+<div style="padding-top:10px">
+	<label>Last Name: </label> <br />
+	<input type="text" placeholder="Last Name" style="width:50%"  @bind="lastname"/>
+</div>
+
+<div style="padding-top:10px">
+	<label>Position: </label> <br />
+	<input type="text" placeholder="Position" style="width:50%" @bind="position" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Salary: </label> <br />
+	<input type="text" placeholder="Salary" style="width:50%" @bind="salary"/>
+</div>
+
+<div style="padding-top:10px">
+	<label>Start Date: </label> <br />
+	<input type="text" placeholder="Start Date" style="width:50%" @bind="startdate" />
+</div>
+
+<div style="padding-top:10px; padding-bottom:20px">
+	<label>Hours: </label> <br />
+	<input type="text" placeholder="Hours" style="width:50%" @bind="hours"/>
+</div>
+
+<div class=" flex-grow-1" style="width: 190px;">
+	<button type="button" class="btn btn-primary w-100"
+	style="white-space: nowrap;" @onclick="MakeEmployee">
+		Add Employee
+	</button>
+
+</div>
+@success
+
+@code {
+	private string employeeid;
+	private string firstname;
+	private string lastname;
+	private string position;
+	private string startdate;
+	private string salary;
+	private string hours;
+	public string success = string.Empty;
+
+	public void MakeEmployee()
+	{
+		Employee employee = new Employee(employeeid, firstname, lastname, position, salary, startdate, hours);
+		EmployeeManager.employees.Add(employee);
+		success = "Employee added";
+	}
+}
