@@ -3,19 +3,90 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CPRG211_Group1_FinalProject.Exceptions;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
     public class Employee
     {
-        public string EmployeeId { get; set; }
-        public string EmployeeFirstName { get; set; }
-        public string EmployeeLastName { get; set; }
-        public string Position { get; set; }
+        private string employeeId;
+        private string employeeFirstName;
+        private string employeeLastName;
+        private string position;
+        private string salary;
+        private string startDate;
+        private string hours;
+        public string EmployeeId { get=> employeeId;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Employee ID");
+                }
+                employeeId = value;
+            }
+        }
+        public string EmployeeFirstName { get => employeeFirstName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("First Name");
+                }
+                employeeFirstName = value;
+            }
+        }
+        public string EmployeeLastName { get => employeeLastName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Last Name");
+                }
+                employeeLastName = value;
+            }
+        }
+        public string Position { get => position;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Position");
+                }
+                position = value;
+            }
+        }
 
-        public string Salary { get; set; }
-        public string StartDate { get; set; }
-        public string Hours { get; set; }
+        public string Salary { get => salary;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Salary");
+                }
+                salary = value;
+            }
+        }
+        public string StartDate { get => startDate;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Start Date");
+                }
+                startDate = value;
+            }
+        }
+        public string Hours { get => hours;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Hours");
+                }
+                hours = value;
+            }
+        }
 
         public Employee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours)
         {
