@@ -1,0 +1,101 @@
+﻿@page "/menu"
+
+@using CPRG211_Group1_FinalProject.Classes
+<h3 style="text-align: center;">Search Menu</h3>
+
+@* menu search input *@
+<form class="d-flex gap-4">
+	<div style="width: 30%">
+		<label>Item ID:</label>
+		<input class="form-control" type="text" /> @*@bind="itemId"*@
+	</div>
+	<div style="width: 30%" >
+		<label>Item Name:</label>
+		<input class="form-control" type="text" /> @*@bind="itemName"*@
+	</div>
+	@* make this into dropdown select - appetizer, main, side, dessert, drink*@
+	<div style="width: 30%;">
+		<label>Item Type:</label>
+		<select class="form-control" style="width: 100%;">
+			<option value="">Select Type</option>
+			<option>Appetizer</option>
+			<option>Main</option>
+			<option>Side</option>
+			<option>Dessert</option>
+			<option>Drink</option>
+		</select>
+	</div>
+
+	<div class="align-self-end flex-grow-1" style="width: 190px;">
+		<button type="button" class="btn btn-primary w-100"
+				style="white-space: nowrap;">
+			Search Menu
+		</button> @*@onclick="FindItem"*@
+	</div>
+</form>
+
+@* dropdown list *@
+@* <div class="form-group">
+	<select class="form-select" @onchange="EmployeeClick">
+
+		@foreach (MenuItem item in items)
+		{
+			if (chosenItem == 1)
+			{
+				<option selected value="@employee"> @employee.ToString() </option>
+			}
+			else
+			{
+				<option value="@employee">@employee.ToString()</option>
+			}
+		}
+
+	</select>
+</div> *@
+
+@* searched item info *@
+<div style="display: flex; flex-direction: column; align-items: center;">
+	<div style="padding-top:10px">
+		<label>Item ID: </label> <br/>
+		<input type="text" placeholder="Item ID" style="width:100%"/>
+
+	</div>
+
+	<div style="padding-top:10px">
+		<label>Item Name: </label> <br/>
+		<input type="text" placeholder="Item Name" style="width:100%"/>
+	</div>
+
+	@* make this into dropdown select - appetizer, main, side, dessert, drink*@
+	<div style="padding-top:10px">
+		<label>Item Type: </label> <br/>
+		<input type="text" placeholder="Item Type" style="width:100%"/>
+	</div>
+
+	<div style="padding-top:10px; padding-bottom: 30px">
+		<label>Item Price: </label> <br/>
+		<input type="text" placeholder="Item Price" style="width:100%"/>
+	</div>
+</div>
+
+<h3 style="text-align: center;">Manage Menu</h3>
+
+@* add, edit and remove buttons *@
+<form class="d-flex gap-4" style="padding-bottom: 10px; padding-top: 10px;">
+	<a href="/additem" class="btn btn-primary w-100" style="white-space: nowrap;">
+		Add Item
+	</a>
+
+	<a href="/edititem" class="btn btn-primary w-100" style="white-space: nowrap;">
+		Edit Item
+	</a>
+
+	<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
+		Remove Item
+	</button>
+</form>
+
+
+@code {
+
+}
