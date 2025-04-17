@@ -12,8 +12,8 @@
 		<input type="text" @bind="employeefirstname"/>
 	</div>
 	<div style="width:30%">
-		<label> Last Name: </label>
-		<input type="text" @bind="employeelastname" />
+		<label> Staff Type: </label>
+		<input type="text" @bind="type" />
 	</div>
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
 		<button type="button" class="btn btn-primary w-100"
@@ -110,7 +110,7 @@
 
 	private string id;
 	private string employeefirstname;
-	private string employeelastname;
+	private string type;
 
 	private string employeeid;
 	private string firstname;
@@ -128,7 +128,7 @@
 
 	private void FindEmployees()
 	{
-		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(employeelastname))
+		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(type))
 		{
 			employees.Clear();
 			return;
@@ -136,7 +136,7 @@
 		employees = EmployeeManager.GetEmployees().Where(item =>
 				(string.IsNullOrWhiteSpace(id) || item.EmployeeId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
 						(string.IsNullOrWhiteSpace(employeefirstname) || item.EmployeeFirstName.Equals(employeefirstname, StringComparison.OrdinalIgnoreCase)) &&
-						(string.IsNullOrWhiteSpace(employeelastname) || item.EmployeeLastName.Equals(employeelastname, StringComparison.OrdinalIgnoreCase))
+						(string.IsNullOrWhiteSpace(type) || item.GetStaffType().Equals(type, StringComparison.OrdinalIgnoreCase))
 						).ToList();
 		if(employees.Count != 0)
 		{

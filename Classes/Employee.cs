@@ -7,7 +7,7 @@ using CPRG211_Group1_FinalProject.Exceptions;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
-    public class Employee
+    public abstract class Employee
     {
         private string employeeId;
         private string employeeFirstName;
@@ -103,5 +103,8 @@ namespace CPRG211_Group1_FinalProject.Classes
         {
             return $"{EmployeeId},{EmployeeFirstName},{EmployeeLastName},{Position},{Salary},{StartDate},{Hours}";
         }
+
+        public abstract string GetStaffType();
+       
     }
 }

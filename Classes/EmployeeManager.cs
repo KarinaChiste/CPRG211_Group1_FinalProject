@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CPRG211_Group1_FinalProject.Components.Pages;
+//using static Android.Icu.Text.Transliterator;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
@@ -11,14 +12,30 @@ namespace CPRG211_Group1_FinalProject.Classes
     {
         public static List<Employee> employees = new List<Employee>();
 
-        public static Employee emp = new Employee("123", "Bob", "Jones", "Chef", "500", "April 5 2024", "40");
+        public static Employee emp = new KitchenStaff("123", "Bob", "Jones", "Chef", "500", "April 5 2024", "40");
 
         public static List<Employee> GetEmployees()
         {
             employees.Add(emp);
             return employees;
         }
-
+         public static Employee CreateEmployee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType)
+        {
+            if(employeeType == "KitchenStaff")
+            {
+                Employee emp = new KitchenStaff(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours);
+                employees.Add(emp);
+                return emp;
+            }
+            else
+            {
+                Employee emp = new FrontOfHouseStaff(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours);
+                employees.Add(emp);
+                return emp;
+            }
+            //Employee employee = new Employee(employeeid, firstname, lastname, position, salary, startdate, hours);
+            //EmployeeManager.employees.Add(employee);
+        }
         
     }
 }
