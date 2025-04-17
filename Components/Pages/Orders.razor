@@ -1,0 +1,140 @@
+﻿@page "/orders"
+@using CPRG211_Group1_FinalProject.Classes
+<h3>Orders</h3>
+
+<form class="d-flex gap-4">
+	<div style="width: 30%">
+		<label> Order Num: </label>
+		<input type="text" @bind="num" />
+	</div>
+	<div class="align-self-end flex-grow-1" style="width: 190px;">
+		<button type="button" class="btn btn-primary w-100"
+				style="white-space: nowrap;" @onclick="FindOrders">
+			Find Order
+		</button>
+	</div>
+
+</form>
+
+@* dropdown list *@
+<div class="form-group">
+	<select class="form-select" @onchange="OrderClick">
+
+		@foreach (Order order in orders)
+		{
+			if (chosenOrder == 1)
+			{
+				<option selected value="@order"> @order.ToString() </option>
+			}
+			else
+			{
+				<option value="@order">@order.ToString()</option>
+			}
+		}
+
+	</select>
+</div>
+
+@* employee info *@
+<div style="padding-top:10px">
+	<label>Order Number: </label> <br />
+	<input type="text" placeholder="Order Number" style="width:50%" readonly value="@ordernum" />
+
+</div>
+
+<div style="padding-top:10px">
+	<label>Item Number: </label> <br />
+	<input type="text" placeholder="Item Number" style="width:50%" readonly value="@itemnum" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Item Name: </label> <br />
+	<input type="text" placeholder="Item Name" style="width:50%" readonly value="@itemname" />
+</div>
+
+<div style="padding-top:10px; padding-bottom:20px">
+	<label>Quantity: </label> <br />
+	<input type="text" placeholder="Quantity" style="width:50%" readonly value="@quantity" />
+</div>
+
+@* buttons *@
+
+<form class="d-flex gap-4">
+
+	<a href="/addemployees">
+		<button type="button" class="btn btn-primary w-100"
+				style="white-space: nowrap; ">
+			Add Order
+		</button>
+	</a>
+
+	<a href="/editemployees">
+		<button type="button" class="btn btn-primary w-100"
+				style="white-space: nowrap; ">
+			Edit Order
+		</button>
+	</a>
+
+	<button type="button" class="btn btn-primary w-100"
+			style="white-space: nowrap;">
+		Remove Order
+	</button>
+</form>
+
+
+
+@code {
+
+	private string num;
+
+	private string ordernum;
+	private string itemnum;
+	private string itemname;
+	private int quantity;
+
+	public int chosenOrder = 1;
+	public string[] orderDetails;
+
+	private List<Order> orders = new List<Order>();
+	// private EmployeeManager employeeManager = new EmployeeManager();
+
+	private void FindOrders()
+	{
+		if (string.IsNullOrWhiteSpace(num))
+		{
+			orders.Clear();
+			return;
+		}
+		// orders = EmployeeManager.GetEmployees().Where(item =>
+		// 		(string.IsNullOrWhiteSpace(num) || item.EmployeeId.Equals(num, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(employeefirstname) || item.EmployeeFirstName.Equals(employeefirstname, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(type) || item.GetStaffType().Equals(type, StringComparison.OrdinalIgnoreCase))
+		// 				).ToList();
+		// if(orders.Count != 0)
+		// {
+		// 	EmployeeSet(orders[orders.Count - 1].ToString());
+		// }
+	}
+
+	public void OrderClick(ChangeEventArgs arg1)
+	{
+		if (arg1.Value is not null)
+		{
+			string myOrder = (string)arg1.Value;
+			OrderSet(myOrder);
+		}
+	}
+
+	public void OrderSet(string theOrder)
+	{
+		if (theOrder.Length != 0)
+		{
+			orderDetails = theOrder.Split(",");
+			ordernum = orderDetails[0];
+			itemnum = orderDetails[1];
+			itemname = orderDetails[2];
+			quantity = Convert.ToInt32(orderDetails[3]);
+		}
+	}
+
+}
