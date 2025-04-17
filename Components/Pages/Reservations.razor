@@ -1,0 +1,62 @@
+﻿@page "/reservations"
+@using CPRG211_Group1_FinalProject.Classes
+
+<h3>Reservations</h3>
+
+@*adding reservation*@
+
+<div class="text-center mb-2">
+	<h5>Add Reservation</h5>
+</div>
+<form class="d-flex gap-4">
+	<div class="form-group flex-grow-1">
+		<label for="code">Name:</label>
+		<input type="text" class="form-control" id="name">
+	</div>
+	<div class="form-group flex-grow-1">
+		<label for="airline">Group Size:</label>
+		<input type="text" class="form-control" id="size">
+	</div>
+	<div class="form-group flex-grow-1">
+		<label for="name">Time:</label>
+		<input type="text" class="form-control" id="time">
+	</div>
+	<div class="align-self-end flex-grow-1" style="width: 190px;">
+		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
+			Add Reservation
+		</button>
+	</div>
+</form>
+
+@*finding reservation*@
+
+<div class="text-center mt-5">
+	<h5>Find Reservation</h5>
+</div>
+
+<div class="d-flex flex-column gap-3">
+	<div class="form-group">
+		<label for="name">Search Name:</label>
+		<input type="text" class="form-control" id="name" />
+	</div>
+
+	<div class="form-group">
+		<label for="time">Search Time:</label>
+		<input type="text" class="form-control" id="time" />
+	</div>
+
+	<div>
+		<button type="button" class="btn btn-primary w-100">
+			Find Reservation
+		</button>
+	</div>
+</div>
+
+@*reservation dropdown*@
+
+<div class="form-group mt-3">
+	<select class="form-select"></select>
+</div>
+@code {
+   
+}
