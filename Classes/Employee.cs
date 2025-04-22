@@ -101,10 +101,10 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public override string ToString()
         {
-            return $"{EmployeeId},{EmployeeFirstName},{EmployeeLastName},{Position},{Salary},{StartDate},{Hours}";
+            string StaffType = GetStaffType().ToString();
+            return $"{EmployeeId},{EmployeeFirstName},{EmployeeLastName},{Position},{Salary},{StartDate},{Hours},{StaffType}";
         }
 
         public abstract string GetStaffType();
-       
     }
 }

@@ -1,9 +1,83 @@
 ﻿@page "/editemployees"
 @using CPRG211_Group1_FinalProject.Classes
 
-
 <h3>Edit Employee</h3>
+<br />
+<h3 style="text-align: center;">Identify</h3>
+<p style="text-align: center;">The employee with the given ID will have their other attributes updated.</p>
+<div style="padding-top:10px">
+	<label>Employee ID: </label> <br />
+	<input type="text" style="width:50%" class="form-control" @bind="employeeid" />
+</div>
+
+<h3 style="text-align: center; padding-top: 3%">Modify</h3>
+<p style="text-align: center;">The attributes below can be modified. If and attribute is left blank, it won't be updated.'</p>
+
+<div style="padding-top:10px">
+	<label>First Name: </label> <br />
+	<input type="text" style="width:50%" class="form-control" @bind="firstname" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Last Name: </label> <br />
+	<input type="text" style="width:50%" class="form-control" @bind="lastname" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Position: </label> <br />
+	<input type="text" style="width:50%" class="form-control" @bind="position" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Salary: </label> <br />
+	<input type="text" style="width:50%" class="form-control" @bind="salary" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Start Date: </label> <br />
+	<input type="text" style="width:50%" class="form-control" @bind="startdate" />
+</div>
+
+<div style="padding-top:10px; padding-bottom:20px">
+	<label>Hours: </label> <br />
+	<input type="text" style="width:50%" class="form-control" @bind="hours" />
+</div>
+<br />
+<div class=" flex-grow-1" style="width: 190px;margin-bottom:30px">
+	<button type="button" class="btn btn-primary w-100"
+	style="white-space: nowrap;" @onclick="ChangeEmployee">
+		Apply Changes
+	</button>
+</div>
+@success
 
 @code {
+	private string employeeid;
+	private string firstname;
+	private string lastname;
+	private string position;
+	private string startdate;
+	private string salary;
+	private string hours;
+	public string success = string.Empty;
 
+	public void ChangeEmployee()
+	{
+		if(employeeid == null)
+		{
+			success = "Please enter a value for employee ID.";
+		}
+		else
+		{
+			try
+			{
+				EmployeeManager.EditEmployee(employeeid, firstname, lastname, position, salary, startdate, hours);
+				success = "Employee edited";
+			}
+			catch (Exception ex)
+			{
+				success = ex.Message;
+			}
+		}
+	}
 }
