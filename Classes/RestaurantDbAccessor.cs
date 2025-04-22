@@ -60,12 +60,50 @@ namespace CPRG211_Group1_FinalProject.Classes
             connection.Close();
         }
 
-        public List<Employee> GetEmployees()
+        public List<Employee> GetEmployees(string idcriteria = null, string namecriteria = null, string typecriteria = null)
         {
             Employee newEmployee;
+            string sql = string.Empty;
             List<Employee> employeeList = new List<Employee>();
             connection.Open();
-            string sql = $"Select * from staff;";
+            if (idcriteria != null)
+            {
+                if (namecriteria != null)
+                {
+                    if(typecriteria != null)
+                    {
+                        sql = $"Select * from staff where EmployeeId = '{idcriteria}' and FirstName = '{namecriteria}' and EmployeeType = '{typecriteria}';";
+                    }
+                    else
+                    {
+                        sql = $"Select * from staff where EmployeeId = '{idcriteria}' and FirstName = '{namecriteria}';";
+                    }
+                }
+                else if (typecriteria != null)
+                {
+                    sql = $"Select * from staff where EmployeeId = '{idcriteria}' and EmployeeType = '{typecriteria}';";
+                }
+                else
+                {
+                    sql = $"Select * from staff where EmployeeId = '{idcriteria}';";
+                }
+            }
+            else if(namecriteria != null)
+            {
+                if(typecriteria!= null)
+                {
+                    sql = $"Select * from staff where FirstName = '{namecriteria}' and EmployeeType = '{typecriteria}';";
+                }
+                else
+                {
+                    sql = $"Select * from staff where  FirstName = '{namecriteria}' ;";
+                }
+            }
+            else if (typecriteria!= null)
+            {
+                sql = $"Select * from staff where EmployeeType = '{typecriteria}';";
+            }
+                //sql = $"Select * from staff;";
             MySqlCommand command = new MySqlCommand( sql, connection);
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())

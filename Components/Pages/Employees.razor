@@ -150,7 +150,19 @@
 		{
 			return;
 		}
-		employees = database.GetEmployees();
+		if (string.IsNullOrWhiteSpace(id))
+		{
+			id = null;	
+		}
+		if (string.IsNullOrWhiteSpace(employeefirstname))
+		{
+			employeefirstname = null;
+		}
+		if (string.IsNullOrWhiteSpace(type))
+		{
+			type = null;
+		}
+		employees = database.GetEmployees(id,employeefirstname,type);
 		if (employees.Count != 0)
 		{
 				EmployeeSet(employees[employees.Count - 1].ToString());
