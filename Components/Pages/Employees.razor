@@ -100,7 +100,7 @@
 
 	<a href="/removeemployees">
 		<button type="button" class="btn btn-primary w-100"
-				style="white-space: nowrap; ">
+		style="white-space: nowrap;" >
 			Remove Employee
 		</button>
 	</a>
@@ -127,23 +127,34 @@
 
 	private List<Employee> employees = new List<Employee>();
 	private EmployeeManager employeeManager = new EmployeeManager();
+	private RestaurantDbAccessor database = new RestaurantDbAccessor();
 
 	private void FindEmployees()
 	{
+		// if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(type))
+		// {
+		// 	employees.Clear();
+		// 	return;
+		// }
+		// employees = database.GetEmployees().Where(item =>
+		// 		(string.IsNullOrWhiteSpace(id) || item.EmployeeId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(employeefirstname) || item.EmployeeFirstName.Equals(employeefirstname, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(type) || item.GetStaffType().Equals(type, StringComparison.OrdinalIgnoreCase))
+		// 				).ToList();
+		// if(employees.Count != 0)
+		// {
+		// 	EmployeeSet(employees[employees.Count - 1].ToString());
+		// }
+
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(type))
 		{
-			employees.Clear();
 			return;
 		}
-		employees = EmployeeManager.GetEmployees().Where(item =>
-				(string.IsNullOrWhiteSpace(id) || item.EmployeeId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
-						(string.IsNullOrWhiteSpace(employeefirstname) || item.EmployeeFirstName.Equals(employeefirstname, StringComparison.OrdinalIgnoreCase)) &&
-						(string.IsNullOrWhiteSpace(type) || item.GetStaffType().Equals(type, StringComparison.OrdinalIgnoreCase))
-						).ToList();
-		if(employees.Count != 0)
+		employees = database.GetEmployees();
+		if (employees.Count != 0)
 		{
-			EmployeeSet(employees[employees.Count - 1].ToString());
-		}
+				EmployeeSet(employees[employees.Count - 1].ToString());
+			}
 	}
 
 	public void EmployeeClick(ChangeEventArgs arg1)
@@ -167,7 +178,13 @@
 			salary = employeeDetails[4];
 			startdate = employeeDetails[5];
 			hours = employeeDetails[6];
+			
 		}
+	}
+
+	public void DeleteEmployee()
+	{
+		database.RemoveEmployee(employeeid);
 	}
 
 }

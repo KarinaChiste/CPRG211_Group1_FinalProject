@@ -8,7 +8,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 {
     class KitchenStaff : Employee
     {
-        public KitchenStaff(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours) : base(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours)
+        public KitchenStaff(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType) : base(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours, employeeType)
         {
         }
 
