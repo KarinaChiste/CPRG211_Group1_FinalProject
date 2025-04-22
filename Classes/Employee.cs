@@ -16,6 +16,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         private string salary;
         private string startDate;
         private string hours;
+        
         public string EmployeeId { get=> employeeId;
             set
             {
@@ -88,7 +89,9 @@ namespace CPRG211_Group1_FinalProject.Classes
             }
         }
 
-        public Employee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours)
+        public string EmployeeType { get; set; }
+
+        public Employee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType)
         {
             EmployeeId = employeeId;
             EmployeeFirstName = employeeFirstName;
@@ -97,6 +100,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             Salary = salary;
             StartDate = startDate;
             Hours = hours;
+            EmployeeType = employeeType;
         }
 
         public override string ToString()

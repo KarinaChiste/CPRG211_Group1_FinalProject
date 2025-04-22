@@ -11,36 +11,62 @@ namespace CPRG211_Group1_FinalProject.Classes
     class EmployeeManager
     {
         public static List<Employee> employees = new List<Employee>();
-        public static Employee emp = new KitchenStaff("123", "Bob", "Jones", "Chef", "500", "April 5 2024", "40");
-        public static void addDemoEmployee()
-        {
-            employees.Add(emp);
-        }
+
+//         public static Employee emp = new KitchenStaff("123", "Bob", "Jones", "Chef", "500", "April 5 2024", "40");
+//         public static void addDemoEmployee()
+//         {
+//             employees.Add(emp);
+//         }
+
+//         public static List<Employee> GetEmployees()
+//         {
+//             return employees;
+//         }
+//         public static string CreateEmployee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType)
+//         {
+//             foreach (Employee emp in employees)
+//             {
+//                 if (emp.EmployeeId == employeeId)
+//                 {
+//                     return "Employee with this ID Already exists!";
+//                 }
+//             }
+//             if (employeeType == "KitchenStaff")
+
+
+        //public static Employee emp = new KitchenStaff("123", "Bob", "Jones", "Chef", "500", "April 5 2024", "40", "Kitchen Staff");
 
         public static List<Employee> GetEmployees()
         {
+            //employees.Add(emp);
             return employees;
         }
-        public static string CreateEmployee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType)
+         public static  Employee CreateEmployee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType)
         {
-            foreach (Employee emp in employees)
+            Employee emp = null;
+            if(employeeType == "Kitchen Staff")
             {
-                if (emp.EmployeeId == employeeId)
-                {
-                    return "Employee with this ID Already exists!";
-                }
-            }
-            if (employeeType == "KitchenStaff")
-            {
-                Employee emp = new KitchenStaff(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours);
+                emp = new KitchenStaff(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours, employeeType);
                 employees.Add(emp);
+
+                //return emp;
+
             }
             else
             {
-                Employee emp = new FrontOfHouseStaff(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours);
+                emp = new FrontOfHouseStaff(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours, employeeType);
                 employees.Add(emp);
+
+//             }
+//             return "Employee Created!";
+
+                //return emp;
             }
-            return "Employee Created!";
+
+            RestaurantDbAccessor db = new RestaurantDbAccessor();
+            db.AddEmployee(emp);
+            return emp;
+
             //Employee employee = new Employee(employeeid, firstname, lastname, position, salary, startdate, hours);
             //EmployeeManager.employees.Add(employee);
         }

@@ -1,5 +1,17 @@
 ﻿@page "/"
+@using CPRG211_Group1_FinalProject.Classes
 
 <h1>Ascent</h1>
 
 Hello, welcome to the Restaurant Management System!
+
+@code{
+
+	private RestaurantDbAccessor restaurantDbAccessor = new RestaurantDbAccessor();
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		restaurantDbAccessor.InitializeDatabase();
+	}
+}
