@@ -2,26 +2,26 @@
 @using CPRG211_Group1_FinalProject.Classes
 <h3>Employees</h3>
 
-<form class="d-flex gap-4">
+<h3 style="text-align: center;">Search Employees</h3>
+<form class="d-flex gap-4" style="padding: 2% 0px 2%">
 	<div style="width: 30%">
 		<label> Employee ID: </label>
-		<input type="text" @bind="id" />
+		<input class="form-control" type="text" @bind="id" />
 	</div>
 	<div style="width: 30%" >
 		<label> First Name: </label>
-		<input type="text" @bind="employeefirstname"/>
+		<input class="form-control" type="text" @bind="employeefirstname" />
 	</div>
 	<div style="width:30%">
 		<label> Staff Type: </label>
-		<input type="text" @bind="type" />
+		<input class="form-control" type="text" @bind="type" />
 	</div>
-	<div class="align-self-end flex-grow-1" style="width: 190px;">
+	<div class="align-self-end flex-grow-1" style="width: 30%;">
 		<button type="button" class="btn btn-primary w-100"
 		style="white-space: nowrap;" @onclick="FindEmployees">
 			Find Employee
 		</button>
 	</div>
-
 </form>
 
 @* dropdown list *@
@@ -44,59 +44,65 @@
 </div>
 
 @* employee info *@
+
 <div style="padding-top:10px">
 	<label>Employee ID: </label> <br />
-	<input type="text" placeholder="Employee ID" style="width:50%" readonly	 value="@employeeid"/>
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@employeeid" />
 
 </div>
 
 <div style="padding-top:10px">
 	<label>First Name: </label> <br />
-	<input type="text" placeholder="First Name" style="width:50%" readonly value="@firstname" />
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@firstname" />
 </div>
 
 <div style="padding-top:10px">
 	<label>Last Name: </label> <br />
-	<input type="text" placeholder="Last Name" style="width:50%" readonly value="@lastname" />
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@lastname" />
 </div>
 
 <div style="padding-top:10px">
 	<label>Position: </label> <br />
-	<input type="text" placeholder="Position" style="width:50%" readonly  value="@position"/>
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@position" />
 </div>
 
 <div style="padding-top:10px">
 	<label>Salary: </label> <br />
-	<input type="text" placeholder="Salary" style="width:50%" readonly value="@salary"/>
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@salary" />
 </div>
 
 <div style="padding-top:10px">
 	<label>Start Date: </label> <br />
-	<input type="text" placeholder="Start Date" style="width:50%" readonly value="@startdate" />
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@startdate" />
+</div>
+
+<div style="padding-top:10px">
+	<label>Hours: </label> <br />
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@hours" />
 </div>
 
 <div style="padding-top:10px; padding-bottom:20px">
-	<label>Hours: </label> <br />
-	<input type="text" placeholder="Hours" style="width:50%" readonly value="@hours"/>
+	<label>Staff Type: </label> <br />
+	<input type="text" style="width:50%; background-color:white" class="form-control" readonly value="@stafftype" />
 </div>
 
 @* buttons *@
 
-<form class="d-flex gap-4">
+<h3 style="text-align: center;">Manage Employees</h3>
 
-	<a href="/addemployees">
-		<button type="button" class="btn btn-primary w-100"
-		style="white-space: nowrap; ">
-			Add Employee
-		</button>
+<form class="d-flex gap-4" style="padding-bottom: 10px; padding-top: 10px;">
+	<a href="/addemployees" class="btn btn-primary w-100" style="white-space: nowrap;">
+		Add Employee
 	</a>
 
-	<a href="/editemployees">
-		<button type="button" class="btn btn-primary w-100"
-		style="white-space: nowrap; ">
-			Edit Employee
-		</button>
+	<a href="/editemployees" class="btn btn-primary w-100" style="white-space: nowrap;">
+		Edit Employee
 	</a>
+
+
+<!-- 	<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;" @onclick="RemoveEmployee">
+		Remove Employee
+	</button> -->
 
 	<a href="/removeemployees">
 		<button type="button" class="btn btn-primary w-100"
@@ -104,7 +110,12 @@
 			Remove Employee
 		</button>
 	</a>
+
 </form>
+
+@success
+
+<br />
 
 
 
@@ -121,6 +132,7 @@
 	private string startdate;
 	private string salary;
 	private string hours;
+	private string stafftype;
 
 	public int chosenEmployee = 1;
 	public string[] employeeDetails;
@@ -150,6 +162,7 @@
 		{
 			return;
 		}
+
 		if (string.IsNullOrWhiteSpace(id))
 		{
 			id = null;	
@@ -190,6 +203,44 @@
 			salary = employeeDetails[4];
 			startdate = employeeDetails[5];
 			hours = employeeDetails[6];
+
+<!-- 			stafftype = employeeDetails[7];
+		}
+	}
+
+	//REMOVE EMPLOYEE CODE
+
+	public string success = string.Empty;
+
+
+	public void RemoveEmployee()
+	{
+		try
+		{
+			if (employeeid == null)
+			{
+				success = "Please enter a value for Employee Id";
+			}
+			else
+			{
+				EmployeeManager.RemoveEmployee(employeeid);
+				employeeid = "";
+				firstname = "";
+				lastname = "";
+				position = "";
+				salary = "";
+				startdate = "";
+				hours = "";
+				stafftype = "";
+				success = "Employee removed";
+			}
+		}
+		catch (Exception ex)
+		{
+			success = ex.Message;
+		}
+	} -->
+
 			
 		}
 	}
@@ -198,5 +249,6 @@
 	{
 		database.RemoveEmployee(employeeid);
 	}
+
 
 }

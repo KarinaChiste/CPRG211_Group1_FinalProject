@@ -3,6 +3,44 @@
 
 <h3>Remove Employee</h3>
 
-@code {
+<div style="padding-top:10px">
+    <label>Employee ID: </label> <br />
+    <input type="text" placeholder="Employee ID" style="width:50%" @bind="employeeid" />
 
+</div>
+
+<div class=" flex-grow-1" style="width: 190px;margin-bottom:30px">
+    <button type="button" class="btn btn-primary w-100"
+    style="white-space: nowrap;" @onclick="DeleteEmployee">
+        Remove Employee
+    </button>
+
+</div>
+@success
+
+@code {
+    private string employeeid;
+    public string success = string.Empty;
+
+
+    public void DeleteEmployee()
+    {
+        try
+        {
+            if (employeeid == null)
+            {
+                success = "Please enter a value for Employee Id";
+            }
+            else
+            {
+                EmployeeManager.RemoveEmployee(employeeid);
+                success = "Employee removed";
+            }
+        }
+        catch(Exception ex)
+        {
+            success = ex.Message;
+        }
+    }
 }
+

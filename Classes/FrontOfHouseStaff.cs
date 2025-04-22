@@ -13,7 +13,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         }
         public override string GetStaffType()
         {
-            return "Front of House";
+            return "Front Of House";
         }
     }
 }

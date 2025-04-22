@@ -16,5 +16,9 @@ namespace CPRG211_Group1_FinalProject.Classes
         {
             throw new NotImplementedException();
         }
+        public static void RemoveExistingOrder(string OrderNum)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
