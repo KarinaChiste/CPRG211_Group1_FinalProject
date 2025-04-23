@@ -155,8 +155,17 @@ namespace CPRG211_Group1_FinalProject.Classes
                 string employeeType = reader.GetString(7);
 
 
-               selectedEmployee = EmployeeManager.CreateEmployee(id, first, last, position, salary, start, hours, employeeType);
-            
+                if (employeeType == "Kitchen Staff")
+                {
+                    selectedEmployee = new KitchenStaff(id, first, last, position, salary, start, hours, employeeType);
+
+                }
+                else
+                {
+                    selectedEmployee = new FrontOfHouseStaff(id, first, last, position, salary, start, hours, employeeType);
+
+                }
+
             }
             connection.Close();
             return selectedEmployee;
