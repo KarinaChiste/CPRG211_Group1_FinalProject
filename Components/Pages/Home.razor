@@ -7,11 +7,11 @@ Hello, welcome to the Restaurant Management System!
 
 @code{
 
-	private RestaurantDbAccessor restaurantDbAccessor = new RestaurantDbAccessor();
+	private EmployeeDbAccessor employeeDbAccessor = new EmployeeDbAccessor();
 
 	protected override void OnInitialized()
 	{
 		base.OnInitialized();
-		restaurantDbAccessor.InitializeDatabase();
+		employeeDbAccessor.InitializeDatabase();
 	}
 }
