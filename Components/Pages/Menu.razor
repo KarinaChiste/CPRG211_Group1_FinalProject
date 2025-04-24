@@ -7,13 +7,13 @@
 <form class="d-flex gap-4">
 	<div style="width: 30%">
 		<label>Item ID:</label>
-		<input class="form-control" type="text" /> @*@bind="itemId"*@
+		<input class="form-control" type="text" @bind="id"/>
 	</div>
 	<div style="width: 30%" >
 		<label>Item Name:</label>
-		<input class="form-control" type="text" /> @*@bind="itemName"*@
+		<input class="form-control" type="text" @bind="name"/>
 	</div>
-	@* make this into dropdown select - appetizer, main, side, dessert, drink*@
+	
 	<div style="width: 30%;">
 		<label>Item Type:</label>
 		<select class="form-control" style="width: 100%;">
@@ -28,33 +28,27 @@
 
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
 		<button type="button" class="btn btn-primary w-100"
-				style="white-space: nowrap;">
+				style="white-space: nowrap;" @onclick="FindMenuItem">
 			Search Menu
-		</button> @*@onclick="FindItem"*@
+		</button>
 	</div>
 </form>
 
 @* dropdown list *@
-@* <div class="form-group">
-	<select class="form-select" @onchange="EmployeeClick">
+<div class="form-group pt-3">
+	<select class="form-select" @onchange="MenuItemClick">
 
-		@foreach (MenuItem item in items)
+		@foreach (MenuItem item in menuItems)
 		{
 			if (chosenItem == 1)
 			{
-				<option selected value="@employee"> @employee.ToString() </option>
+				<option selected value="@item"> @item.ToString() </option>
 			}
 			else
 			{
-				<option value="@employee">@employee.ToString()</option>
+				<option value="@item">@item.ToString()</option>
 			}
 		}
-
-	</select>
-</div> *@
-
-<div style="width: 100%; padding-top: 10px">
-	<select class="form-control" style="width: 100%;">
 
 	</select>
 </div>
@@ -63,45 +57,127 @@
 <div style="display: flex; flex-direction: column; align-items: center;">
 	<div style="padding-top:10px">
 		<label>Item ID: </label> <br/>
-		<input type="text" placeholder="Item ID" style="width:100%"/>
+		<input type="text" placeholder="Item ID" style="width:100%" readonly value="@itemId"/>
 
 	</div>
 
 	<div style="padding-top:10px">
 		<label>Item Name: </label> <br/>
-		<input type="text" placeholder="Item Name" style="width:100%"/>
+		<input type="text" placeholder="Item Name" style="width:100%" readonly value="@itemName"/>
 	</div>
 
-	@* make this into dropdown select - appetizer, main, side, dessert, drink*@
 	<div style="padding-top:10px">
-		<label>Item Type: </label> <br/>
-		<input type="text" placeholder="Item Type" style="width:100%"/>
+		<label>Item Price: </label> <br />
+		<input type="text" placeholder="Item Price" style="width:100%" readonly value="@itemPrice"/>
 	</div>
 
-	<div style="padding-top:10px; padding-bottom: 30px">
-		<label>Item Price: </label> <br/>
-		<input type="text" placeholder="Item Price" style="width:100%"/>
+	<div style="padding-top:10px; padding-bottom:30px">
+		<label>Item Type: </label> <br/>
+		<input type="text" placeholder="Item Type" style="width:100%" readonly value="@itemType" />
 	</div>
 </div>
 
 <h3 style="text-align: center;">Manage Menu</h3>
 
-@* add, edit and remove buttons *@
+@* add and remove buttons *@
 <form class="d-flex gap-4" style="padding-bottom: 10px; padding-top: 10px;">
 	<a href="/additem" class="btn btn-primary w-100" style="white-space: nowrap;">
-		Add Item
+		Add New Item
 	</a>
 
-	<a href="/edititem" class="btn btn-primary w-100" style="white-space: nowrap;">
+	@* 	<a href="/edititem" class="btn btn-primary w-100" style="white-space: nowrap;">
 		Edit Item
-	</a>
+	</a> *@
 
-	<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
-		Remove Item
-	</button>
+	<a href="/removeitem" class="btn btn-primary w-100" style="white-space: nowrap;">
+		Remove Current Item
+	</a>
 </form>
 
 
 @code {
+	private string id;
+	private string name;
+	private string type;
+
+	private string itemId;
+	private string itemName;
+	private string itemPrice;
+	private string itemType;
+
+	public int chosenItem = 1;
+	public string[] menuItemDetails;
+
+	private List<MenuItem> menuItems = new List<MenuItem>();
+	private MenuManager menuManager = new MenuManager();
+	private MenuDbAccessor database = new MenuDbAccessor();
+
+	private void FindMenuItem()
+	{
+		// if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
+		// {
+		// 	menuItems.Clear();
+		// 	return;
+		// }
+		// menuItems = database.GetMenuItems().Where(item =>
+		// 		(string.IsNullOrWhiteSpace(id) || item.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(name) || item.ItemName.Equals(name, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(type) || item.GetMenuItemType().Equals(type, StringComparison.OrdinalIgnoreCase))
+		// 				).ToList();
+		// if(menuItems.Count != 0)
+		// {
+		// 	ItemSet(menuItems[menuItems.Count - 1].ToString());
+		// }
+
+		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
+		{
+			return;
+		}
+		if (string.IsNullOrWhiteSpace(id))
+		{
+			id = null;
+		}
+		if (string.IsNullOrWhiteSpace(name))
+		{
+			name = null;
+		}
+		if (string.IsNullOrWhiteSpace(type))
+		{
+			type = null;
+		}
+		// menuItems = database.GetMenuItems(id, name, type);
+		// if (menuItems.Count != 0)
+		// {
+		// 	MenuSet(menuItems[menuItems.Count - 1].ToString());
+		// }
+	}
+
+	public void MenuItemClick(ChangeEventArgs arg1)
+	{
+		if (arg1.Value is not null)
+		{
+			string myMenuItem = (string)arg1.Value;
+			MenuSet(myMenuItem);
+		}
+	}
+
+	public void MenuSet(string theMenuItem)
+	{
+		if (theMenuItem.Length != 0)
+		{
+			menuItemDetails = theMenuItem.Split(",");
+			itemId = menuItemDetails[0];
+			itemName = menuItemDetails[1];
+			itemType = menuItemDetails[2];
+			itemPrice = menuItemDetails[3];
+		}
+	}
+
+	// public void DeleteMenuItem()
+	// {
+	// 	database.RemoveMenuItem(itemId);
+	// }
 
 }
+
+
