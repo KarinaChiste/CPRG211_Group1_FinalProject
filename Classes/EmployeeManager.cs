@@ -35,7 +35,7 @@ namespace CPRG211_Group1_FinalProject.Classes
                 //return emp;
             }
 
-            RestaurantDbAccessor db = new RestaurantDbAccessor();
+            EmployeeDbAccessor db = new EmployeeDbAccessor();
             db.AddEmployee(emp);
             return emp;
             //Employee employee = new Employee(employeeid, firstname, lastname, position, salary, startdate, hours);

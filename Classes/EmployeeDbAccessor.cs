@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CPRG211_Group1_FinalProject.Interfaces;
 using MySqlConnector;
 //using static Android.Net.Wifi.WifiEnterpriseConfig;
 
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
-    public class RestaurantDbAccessor
+    public class EmployeeDbAccessor:IDatabase
     {
         protected MySqlConnection connection;
 
-        public RestaurantDbAccessor()
+        public EmployeeDbAccessor()
         {
             string dbHost = "localhost";
             string dbUser = "root";
@@ -154,8 +155,17 @@ namespace CPRG211_Group1_FinalProject.Classes
                 string employeeType = reader.GetString(7);
 
 
-               selectedEmployee = EmployeeManager.CreateEmployee(id, first, last, position, salary, start, hours, employeeType);
-            
+                if (employeeType == "Kitchen Staff")
+                {
+                    selectedEmployee = new KitchenStaff(id, first, last, position, salary, start, hours, employeeType);
+
+                }
+                else
+                {
+                    selectedEmployee = new FrontOfHouseStaff(id, first, last, position, salary, start, hours, employeeType);
+
+                }
+
             }
             connection.Close();
             return selectedEmployee;
@@ -165,7 +175,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         public void RemoveEmployee(string employeeId)
         {
             connection.Open();
-            string sql = $"delete from staff where employeeid = '{employeeId}'";
+            string sql = $"delete from staff where EmployeeId = '{employeeId}'";
             MySqlCommand command = new MySqlCommand( sql, connection);
             command.ExecuteNonQuery();
             connection.Close();
