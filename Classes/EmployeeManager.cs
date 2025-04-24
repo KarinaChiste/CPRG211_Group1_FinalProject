@@ -19,7 +19,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             //employees.Add(emp);
             return employees;
         }
-         public static  Employee CreateEmployee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType)
+        public static  Employee CreateEmployee(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType)
         {
             Employee emp = null;
             if(employeeType == "Kitchen Staff")
