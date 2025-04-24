@@ -50,7 +50,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             }
 
             //RestaurantDbAccessor db = new RestaurantDbAccessor();
-            //db.AddItem(item);
+            //db.AddMenuItem(item);
             return item;
         }
 
