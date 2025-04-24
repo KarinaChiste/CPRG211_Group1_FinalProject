@@ -8,10 +8,14 @@ Hello, welcome to the Restaurant Management System!
 @code{
 
 	private EmployeeDbAccessor employeeDbAccessor = new EmployeeDbAccessor();
+	private ReservationDbAccessor reservationDbAccessor = new ReservationDbAccessor();
+	private MenuDbAccessor menuDbAccessor = new MenuDbAccessor();
 
 	protected override void OnInitialized()
 	{
 		base.OnInitialized();
 		employeeDbAccessor.InitializeDatabase();
+		reservationDbAccessor.InitializeDatabase();
+		menuDbAccessor.InitializeDatabase();
 	}
 }

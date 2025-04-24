@@ -49,7 +49,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public string ItemType { get; set; }
 
-        public MenuItem(string itemId, string itemName, string price, string itemType)
+        public MenuItem(string itemId, string itemName, string itemType, string price)
         {
             ItemId = itemId;
             ItemName = itemName;
@@ -59,7 +59,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public override string ToString()
         {
-            return $"{ItemId}, {ItemName}, {Price}, {ItemType}";
+            return $"{ItemId}, {ItemName}, {ItemType}, {Price}";
         }
 
         public abstract string GetMenuItemType();
