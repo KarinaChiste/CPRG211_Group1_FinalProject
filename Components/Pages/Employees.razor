@@ -23,7 +23,7 @@
 	</div>
 
 </form>
-
+<br />
 @* dropdown list *@
 <div class="form-group">
 	<select class="form-select" @onchange="EmployeeClick">
@@ -75,9 +75,14 @@
 	<input type="text" placeholder="Start Date" style="width:50%" readonly value="@startdate" />
 </div>
 
-<div style="padding-top:10px; padding-bottom:20px">
+<div style="padding-top:10px;">
 	<label>Hours: </label> <br />
 	<input type="text" placeholder="Hours" style="width:50%" readonly value="@hours"/>
+</div>
+
+<div style="padding-top:10px; padding-bottom:20px">
+	<label>Staff Type: </label> <br />
+	<input type="text" style="width:50%;" placeholder="Staff Type"  readonly value="@stafftype" />
 </div>
 
 @* buttons *@
@@ -121,6 +126,7 @@
 	private string startdate;
 	private string salary;
 	private string hours;
+	private string stafftype;
 
 	public int chosenEmployee = 1;
 	public string[] employeeDetails;
@@ -131,20 +137,7 @@
 
 	private void FindEmployees()
 	{
-		// if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(type))
-		// {
-		// 	employees.Clear();
-		// 	return;
-		// }
-		// employees = database.GetEmployees().Where(item =>
-		// 		(string.IsNullOrWhiteSpace(id) || item.EmployeeId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
-		// 				(string.IsNullOrWhiteSpace(employeefirstname) || item.EmployeeFirstName.Equals(employeefirstname, StringComparison.OrdinalIgnoreCase)) &&
-		// 				(string.IsNullOrWhiteSpace(type) || item.GetStaffType().Equals(type, StringComparison.OrdinalIgnoreCase))
-		// 				).ToList();
-		// if(employees.Count != 0)
-		// {
-		// 	EmployeeSet(employees[employees.Count - 1].ToString());
-		// }
+
 
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(type))
 		{
@@ -165,8 +158,8 @@
 		employees = database.GetEmployees(id,employeefirstname,type);
 		if (employees.Count != 0)
 		{
-				EmployeeSet(employees[employees.Count - 1].ToString());
-			}
+			EmployeeSet(employees[employees.Count - 1].ToString());
+		}
 	}
 
 	public void EmployeeClick(ChangeEventArgs arg1)
@@ -190,7 +183,8 @@
 			salary = employeeDetails[4];
 			startdate = employeeDetails[5];
 			hours = employeeDetails[6];
-			
+			stafftype = employeeDetails[7];
+
 		}
 	}
 
