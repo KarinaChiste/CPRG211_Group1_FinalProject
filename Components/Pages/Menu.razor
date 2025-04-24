@@ -28,7 +28,7 @@
 
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
 		<button type="button" class="btn btn-primary w-100"
-				style="white-space: nowrap;">
+		style="white-space: nowrap;">
 			Search Menu
 		</button> @*@onclick="FindItem"*@
 	</div>
@@ -86,22 +86,107 @@
 
 <h3 style="text-align: center;">Manage Menu</h3>
 
-@* add, edit and remove buttons *@
+@* add and remove buttons *@
 <form class="d-flex gap-4" style="padding-bottom: 10px; padding-top: 10px;">
 	<a href="/additem" class="btn btn-primary w-100" style="white-space: nowrap;">
 		Add Item
 	</a>
 
-	<a href="/edititem" class="btn btn-primary w-100" style="white-space: nowrap;">
+	@* 	<a href="/edititem" class="btn btn-primary w-100" style="white-space: nowrap;">
 		Edit Item
-	</a>
+	</a> *@
 
-	<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
+	<a href="/removeitem" class="btn btn-primary w-100" style="white-space: nowrap;">
 		Remove Item
-	</button>
+	</a>
 </form>
 
 
 @code {
+	private string id;
+	private string name;
+	private string type;
+
+	private string itemId;
+	private string itemName;
+	private string itemType;
+	private string itemPrice;
+
+	public int chosenItem = 1;
+	public string[] menuItemDetails;
+
+	private List<MenuItem> menuItems = new List<MenuItem>();
+	private MenuManager menuManager = new MenuManager();
+	private MenuDbAccessor database = new MenuDbAccessor();
+
+	private void FindMenuItem()
+	{
+		// if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
+		// {
+		// 	menuItems.Clear();
+		// 	return;
+		// }
+		// menuItems = database.GetMenuItems().Where(item =>
+		// 		(string.IsNullOrWhiteSpace(id) || item.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(name) || item.ItemName.Equals(name, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(type) || item.GetMenuItemType().Equals(type, StringComparison.OrdinalIgnoreCase))
+		// 				).ToList();
+		// if(menuItems.Count != 0)
+		// {
+		// 	ItemSet(menuItems[menuItems.Count - 1].ToString());
+		// }
+
+		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
+		{
+			return;
+		}
+		if (string.IsNullOrWhiteSpace(id))
+		{
+			id = null;
+		}
+		if (string.IsNullOrWhiteSpace(name))
+		{
+			name = null;
+		}
+		if (string.IsNullOrWhiteSpace(type))
+		{
+			type = null;
+		}
+		// menuItems = database.GetMenuItems(id, name, type);
+		// if (menuItems.Count != 0)
+		// {
+		// 	MenuSet(menuItems[menuItems.Count - 1].ToString());
+		// }
+	}
+
+	public void MenuItemClick(ChangeEventArgs arg1)
+	{
+		if (arg1.Value is not null)
+		{
+			string myMenuItem = (string)arg1.Value;
+			MenuSet(myMenuItem);
+		}
+	}
+
+	public void MenuSet(string theMenuItem)
+	{
+		if (theMenuItem.Length != 0)
+		{
+			menuItemDetails = theMenuItem.Split(",");
+			itemId = menuItemDetails[0];
+			itemName = menuItemDetails[1];
+			itemType = menuItemDetails[2];
+			itemPrice = menuItemDetails[3];
+		}
+	}
+
+	// public void DeleteMenuItem()
+	// {
+	// 	database.RemoveMenuItem(itemId);
+	// }
+
+}
+
+
 
 }

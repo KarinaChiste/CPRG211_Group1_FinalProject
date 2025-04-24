@@ -12,7 +12,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         {
         }
 
-        public override string GetItemType()
+        public override string GetMenuItemType()
         {
             return "Drink";
         }

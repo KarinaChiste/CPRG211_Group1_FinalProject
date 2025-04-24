@@ -62,7 +62,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             return $"{ItemId}, {ItemName}, {Price}, {ItemType}";
         }
 
-        public abstract string GetItemType();
+        public abstract string GetMenuItemType();
 
     }
 }
