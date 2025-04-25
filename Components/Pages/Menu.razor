@@ -42,7 +42,7 @@
 		{
 			if (chosenItem == 1)
 			{
-				<option selected value="@item"> @item.ToString() </option>
+				<option selected value="@item">@item.ToString()</option>
 			}
 			else
 			{
@@ -114,20 +114,20 @@
 
 	private void FindMenuItem()
 	{
-		// if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
-		// {
-		// 	menuItems.Clear();
-		// 	return;
-		// }
-		// menuItems = database.GetMenuItems().Where(item =>
-		// 		(string.IsNullOrWhiteSpace(id) || item.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
-		// 				(string.IsNullOrWhiteSpace(name) || item.ItemName.Equals(name, StringComparison.OrdinalIgnoreCase)) &&
-		// 				(string.IsNullOrWhiteSpace(type) || item.GetMenuItemType().Equals(type, StringComparison.OrdinalIgnoreCase))
-		// 				).ToList();
-		// if(menuItems.Count != 0)
-		// {
-		// 	ItemSet(menuItems[menuItems.Count - 1].ToString());
-		// }
+		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
+		{
+			menuItems.Clear();
+			return;
+		}
+		menuItems = database.GetMenuItems().Where(item =>
+				(string.IsNullOrWhiteSpace(id) || item.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
+						(string.IsNullOrWhiteSpace(name) || item.ItemName.Equals(name, StringComparison.OrdinalIgnoreCase)) &&
+						(string.IsNullOrWhiteSpace(type) || item.GetMenuItemType().Equals(type, StringComparison.OrdinalIgnoreCase))
+						).ToList();
+		if(menuItems.Count != 0)
+		{
+			MenuSet(menuItems[menuItems.Count - 1].ToString());
+		}
 
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
 		{
@@ -145,11 +145,11 @@
 		{
 			type = null;
 		}
-		// menuItems = database.GetMenuItems(id, name, type);
-		// if (menuItems.Count != 0)
-		// {
-		// 	MenuSet(menuItems[menuItems.Count - 1].ToString());
-		// }
+		menuItems = database.GetMenuItems(id, name, type);
+		if (menuItems.Count != 0)
+		{
+			MenuSet(menuItems[menuItems.Count - 1].ToString());
+		}
 	}
 
 	public void MenuItemClick(ChangeEventArgs arg1)
@@ -168,15 +168,15 @@
 			menuItemDetails = theMenuItem.Split(",");
 			itemId = menuItemDetails[0];
 			itemName = menuItemDetails[1];
-			itemType = menuItemDetails[2];
-			itemPrice = menuItemDetails[3];
+			itemPrice = menuItemDetails[2];
+			itemType = menuItemDetails[3];
 		}
 	}
 
-	// public void DeleteMenuItem()
-	// {
-	// 	database.RemoveMenuItem(itemId);
-	// }
+	public void DeleteEmployee()
+	{
+		database.RemoveMenuItem(itemId);
+	}
 
 }
 

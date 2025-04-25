@@ -30,7 +30,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Item ID:");
+                    throw new EmptyFieldException("Item Name:");
                 }
                 itemName = value;
             }
@@ -41,7 +41,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Item ID:");
+                    throw new EmptyFieldException("Price:");
                 }
                 price = value;
             }
@@ -49,7 +49,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public string ItemType { get; set; }
 
-        public MenuItem(string itemId, string itemName, string itemType, string price)
+        public MenuItem(string itemId, string itemName, string price, string itemType)
         {
             ItemId = itemId;
             ItemName = itemName;
@@ -59,7 +59,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public override string ToString()
         {
-            return $"{ItemId}, {ItemName}, {ItemType}, {Price}";
+            return $"{ItemId}, {ItemName}, {Price}, {ItemType}";
         }
 
         public abstract string GetMenuItemType();

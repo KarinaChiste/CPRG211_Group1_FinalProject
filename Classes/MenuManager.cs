@@ -49,9 +49,15 @@ namespace CPRG211_Group1_FinalProject.Classes
                 menuItems.Add(item);
             }
 
-            //RestaurantDbAccessor db = new RestaurantDbAccessor();
-            //db.AddMenuItem(item);
+            MenuDbAccessor db = new MenuDbAccessor();
+            db.AddMenuItem(item);
+           
             return item;
+        }
+        public static void DeleteMenuItem(string itemId)
+        {
+            MenuDbAccessor db = new MenuDbAccessor();
+            db.RemoveMenuItem(itemId);
         }
 
     }
