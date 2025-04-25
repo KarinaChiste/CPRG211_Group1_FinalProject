@@ -183,7 +183,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         public void RemoveMenuItem(string itemId)
         {
             connection.Open();
-            string sql = $"Select * from menu where ItemId = ' {itemId}'";
+            string sql = $"DELETE FROM menu WHERE ItemId = '{itemId}'";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.ExecuteNonQuery();
             connection.Close();

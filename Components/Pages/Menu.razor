@@ -89,9 +89,10 @@
 		Edit Item
 	</a> *@
 
-	<a href="/removeitem" class="btn btn-primary w-100" style="white-space: nowrap;">
+	<button class="btn btn-danger w-100" style="white-space: nowrap;" @onclick="DeleteMenuItem">
 		Remove Current Item
-	</a>
+	</button>
+
 </form>
 
 
@@ -173,7 +174,7 @@
 		}
 	}
 
-	public void DeleteEmployee()
+	public void DeleteMenuItem()
 	{
 		database.RemoveMenuItem(itemId);
 	}
