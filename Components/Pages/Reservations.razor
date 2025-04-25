@@ -107,6 +107,13 @@
 	{
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(time))
 		{
+			reservationId = null;
+			reservationName = null;
+			reservationSize = null;
+			reservationDate = null;
+			reservationTime = null;
+			chosenReservation = 2;
+
 			return;
 		}
 		if (string.IsNullOrWhiteSpace(id))
@@ -125,6 +132,14 @@
 		if (reservations.Count != 0)
 		{
 			ReservationSet(reservations[reservations.Count - 1].ToString());
+		}
+		else
+		{
+			reservationId = null;
+			reservationName = null;
+			reservationSize = null;
+			reservationDate = null;
+			reservationTime = null;
 		}
 	}
 
@@ -151,9 +166,21 @@
 		}
 	}
 
-	private void DeleteReservation()
+	// private void DeleteReservation()
+	// {
+	// 	database.RemoveReservation(reservationId);
+	// }
+
+	public async void DeleteReservation()
 	{
-		database.RemoveReservation(reservationId);
+
+
+		bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Reservation", $"Delete reservation with ID: {reservationId}", "Confirm", "Cancel");
+
+		if (confirm)
+		{
+			database.RemoveReservation(reservationId);
+		}
 	}
 
 }
