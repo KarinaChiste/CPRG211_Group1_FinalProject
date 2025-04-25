@@ -48,7 +48,10 @@ namespace CPRG211_Group1_FinalProject.Classes
                 item = new DrinkType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
-            //THROW EXCEPTION IN ELSE STATEMENT
+            else
+            {
+                throw new ArgumentException("Item type not selected or invalid. Please choose a valid menu item type.");
+            }
 
             MenuDbAccessor db = new MenuDbAccessor();
             db.AddMenuItem(item);
