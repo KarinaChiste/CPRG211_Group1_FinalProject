@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CPRG211_Group1_FinalProject.Components.Pages;
+using CPRG211_Group1_FinalProject.Exceptions;
 //using static Android.Icu.Text.Transliterator;
 
 namespace CPRG211_Group1_FinalProject.Classes
@@ -28,14 +29,18 @@ namespace CPRG211_Group1_FinalProject.Classes
                 employees.Add(emp);
                 //return emp;
             }
-            else
+            else if (employeeType == "Front of House")
             {
                 emp = new FrontOfHouseStaff(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours, employeeType);
                 employees.Add(emp);
                 //return emp;
             }
+            else
+            {
+                throw new TypeNotSelectedException();
+            }
 
-            EmployeeDbAccessor db = new EmployeeDbAccessor();
+                EmployeeDbAccessor db = new EmployeeDbAccessor();
             db.AddEmployee(emp);
             return emp;
             //Employee employee = new Employee(employeeid, firstname, lastname, position, salary, startdate, hours);
