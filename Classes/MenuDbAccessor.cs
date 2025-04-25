@@ -129,6 +129,7 @@ namespace CPRG211_Group1_FinalProject.Classes
                 {
                     throw new InvalidOperationException($"Unknown menu item type: {type}");
                 }
+                itemList.Add(newItem);
             }
             connection.Close();
             return itemList;
