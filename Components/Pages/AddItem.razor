@@ -34,7 +34,7 @@
 
 	<div style="width: 30%">
 		<label>Item Price: </label> <br />
-		<input class="form-control" placeholder="Item Price" @bind="itemPrice" />
+		<input class="form-control" placeholder="Item Price" @bind="price" />
 	</div>
 
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
@@ -51,7 +51,7 @@
 	private string itemId;
 	private string itemName;
 	private string itemType;
-	private string itemPrice;
+	private string price;
 
 	public string success = string.Empty;
 
@@ -59,7 +59,7 @@
 	{
 		try
 		{
-			MenuManager.CreateMenuItem(itemId, itemName, itemType, itemPrice);
+			MenuManager.CreateMenuItem(itemId, itemName, itemType, price);
 			success = "Menu item added!";
 		}
 		catch (Exception ex)
