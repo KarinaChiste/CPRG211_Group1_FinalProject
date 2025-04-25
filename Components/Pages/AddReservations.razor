@@ -14,23 +14,23 @@
 <form class="d-flex gap-4">
 	<div class="form-group flex-grow-1">
 		<label for="reservationID">Reservation ID:</label>
-		<input type="text" class="form-control" id="id" @bind="reservationId">
+		<input type="text" class="form-control" placeholder="6 digits" id="id" @bind="reservationId">
 	</div>
 	<div class="form-group flex-grow-1">
 		<label for="name">Name:</label>
-		<input type="text" class="form-control" id="name" @bind="name">
+		<input type="text" class="form-control" placeholder="Name" id="name" @bind="name">
 	</div>
 	<div class="form-group flex-grow-1">
 		<label for="groupsize">Group Size:</label>
-		<input type="text" class="form-control" id="size" @bind="groupSize">
+		<input type="text" class="form-control" placeholder="Group Size" id="size" @bind="groupSize">
 	</div>
 	<div class="form-group flex-grow-1">
 		<label for="date">Date:</label>
-		<input type="text" class="form-control" id="date" @bind="date">
+		<input type="text" class="form-control" placeholder="Date" id="date" @bind="date">
 	</div>
 	<div class="form-group flex-grow-1">
 		<label for="time">Time:</label>
-		<input type="text" class="form-control" id="time" @bind="time">
+		<input type="text" class="form-control" placeholder="Time" id="time" @bind="time">
 	</div>
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
 		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;" @onclick="MakeReservation">
