@@ -15,37 +15,37 @@ namespace CPRG211_Group1_FinalProject.Classes
             return menuItems;
         }
 
-        public static MenuItem CreateMenuItem(string itemId, string itemName, string price, string itemType)
+        public static MenuItem CreateMenuItem(string itemId, string itemName, string itemType, string price)
         {
             MenuItem item = null;
 
             if (itemType == "Appetizer")
             {
-                item = new AppetizerType(itemId, itemName, price, itemType);
+                item = new AppetizerType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
             if (itemType == "Main")
             {
-                item = new MainType(itemId, itemName, price, itemType);
+                item = new MainType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
             if (itemType == "Side")
             {
-                item = new SideType(itemId, itemName, price, itemType);
+                item = new SideType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
             if (itemType == "Dessert")
             {
-                item = new DessertType(itemId, itemName, price, itemType);
+                item = new DessertType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
             if (itemType == "Drink")
             {
-                item = new DrinkType(itemId, itemName, price, itemType);
+                item = new DrinkType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 

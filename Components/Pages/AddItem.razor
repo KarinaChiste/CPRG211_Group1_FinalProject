@@ -3,41 +3,55 @@
 
 <h3>Add New Menu Item</h3>
 
-<div style="padding-top:10px">
-	<label>Item ID: </label> <br />
-	<input type="text" placeholder="Item ID" style="width:50%" @bind="itemId" />
+<form class="d-flex gap-4">
+	<div style="width: 30%">
+		<label>Item ID: </label> <br />
+		<input class="form-control" placeholder="Item ID" @bind="itemId" />
 
-</div>
+	</div>
 
-<div style="padding-top:10px">
-	<label>Item Name: </label> <br />
-	<input type="text" placeholder="Item Name" style="width:50%" @bind="itemName" />
-</div>
+	<div style="width: 30%">
+		<label>Item Name: </label> <br />
+		<input class="form-control" placeholder="Item Name" @bind="itemName" />
+	</div>
 
-<div style="padding-top:10px">
-	<label>Item Price: </label> <br />
-	<input type="text" placeholder="Item Price" style="width:50%" @bind="itemPrice" />
-</div>
+	@* <div style="padding-top:10px">
+		<label>Item Type: </label> <br />
+		<input type="text" placeholder="Item Type" style="width:50%" @bind="itemType" />
+	</div> *@
 
-<div style="padding-top:10px">
-	<label>Item Type: </label> <br />
-	<input type="text" placeholder="Item Type" style="width:50%" @bind="itemType" />
-</div>
+	<div style="width: 30%;">
+		<label>Item Type:</label>
+		<select class="form-control" style="width: 100%;">
+			<option value="">Select Type</option>
+			<option>Appetizer</option>
+			<option>Main</option>
+			<option>Side</option>
+			<option>Dessert</option>
+			<option>Drink</option>
+		</select>
+	</div>
 
-<div class=" flex-grow-1" style="width: 190px; padding-top:10px">
-	<button type="button" class="btn btn-primary w-100"
-			style="white-space: nowrap;" @onclick="MakeMenuItem">
-		Add Item
-	</button>
+	<div style="width: 30%">
+		<label>Item Price: </label> <br />
+		<input class="form-control" placeholder="Item Price" @bind="itemPrice" />
+	</div>
 
-</div>
+	<div class="align-self-end flex-grow-1" style="width: 190px;">
+		<button type="button" class="btn btn-primary w-100"
+		style="white-space: nowrap;" @onclick="MakeMenuItem">
+			Add Item
+		</button>
+	</div>
+</form>
+
 @success
 
 @code {
 	private string itemId;
 	private string itemName;
-	private string itemPrice;
 	private string itemType;
+	private string itemPrice;
 
 	public string success = string.Empty;
 
@@ -45,7 +59,7 @@
 	{
 		try
 		{
-			MenuManager.CreateMenuItem(itemId, itemName, itemPrice, itemType);
+			MenuManager.CreateMenuItem(itemId, itemName, itemType, itemPrice);
 			success = "Menu item added!";
 		}
 		catch (Exception ex)
