@@ -48,111 +48,100 @@ namespace CPRG211_Group1_FinalProject.Classes
         public void AddReservation(Reservation reservation)
         {
             connection.Open();
-            string insertsql = $"Insert into reservations(ReservationId, ReservationName, GroupSize, Date, Time) values ('{reservation.ReservationID}', '{reservation.Name}', '{reservation.GroupSize}', '{reservation.Date}', '{reservation.Time}');";
+            string insertsql = $"Insert into reservations(ReservationId, ReservationName, GroupSize, Date, Time) values ('{reservation.ReservationId}', '{reservation.Name}', '{reservation.GroupSize}', '{reservation.Date}', '{reservation.Time}');";
             MySqlCommand insertCommand = new MySqlCommand(insertsql, connection);
             insertCommand.ExecuteNonQuery();
             connection.Close();
         }
 
-        public void RemoveReservation(string reservationID)
+        public List<Reservation> GetReservations(string idcriteria = null, string namecriteria = null, string timecriteria = null)
         {
+            Reservation newReservation;
+            string sql = string.Empty;
+            List<Reservation> reservationList = new List<Reservation>();
             connection.Open();
-            string sql = $"DELETE FROM menu WHERE ReservationID = '{reservationID}'";
-            MySqlCommand command = new MySqlCommand(sql, connection);
-            command.ExecuteNonQuery();
-            connection.Close();
+            if (idcriteria != null)
+            {
+                if (namecriteria != null)
+                {
+                    if (timecriteria != null)
+                    {
+                        sql = $"Select * from reservations where ReservationId = '{idcriteria}' and ReservationName = '{namecriteria}' and Time = '{timecriteria}';";
+                    }
+                    else
+                    {
+                        sql = $"Select * from reservations where ReservationId = '{idcriteria}' and ReservationName = '{namecriteria}';"; ;
+                    }
+                }
+                else if (timecriteria != null)
+                {
+                    sql = $"Select * from reservations where ReservationId = '{idcriteria}' and Time = '{timecriteria}';";
+                }
+                else
+                {
+                    sql = $"Select * from reservations where ReservationId = '{idcriteria}';";
+                }
+            }
+            else if (namecriteria != null)
+            {
+                if (timecriteria != null)
+                {
+                    sql = $"Select * from reservations where ReservationName = '{namecriteria}' and Time = '{timecriteria}';";
+                }
+                else
+                {
+                    sql = $"Select * from reservations where ReservationName = '{namecriteria}' ;";
+                }
+            }
+            else if (timecriteria != null)
+            {
+                sql = $"Select * from reservations where Time = '{timecriteria}';";
+            }
 
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string id = reader.GetString(0);
+                string name = reader.GetString(1);
+                string size = reader.GetString(2);
+                string date = reader.GetString(3);
+                string time = reader.GetString(4);
+
+
+
+
+                newReservation = new Reservation(id, name, size, date, time);
+                reservationList.Add(newReservation);
+            }
+            connection.Close();
+            return reservationList;
         }
 
-        //public List<Reservation> GetReservations(string idcriteria = null, string namecriteria = null, string timecriteria = null)
-        //{
-        //    Reservation newReservation;
-        //    string sql = string.Empty;
-        //    List<Reservation> reservationList = new List<Reservation>();
-        //    connection.Open();
-        //    if (idcriteria != null)
-        //    {
-        //        if (namecriteria != null)
-        //        {
-        //            if (timecriteria != null)
-        //            {
-        //                sql = $"Select * from reservations where ReservationId = '{idcriteria}' and ReservationName = '{namecriteria}' and Time = '{timecriteria}';";
-        //            }
-        //            else
-        //            {
-        //                sql = $"Select * from reservations where ReservationId = '{idcriteria}' and ReservationName = '{namecriteria}';"; ;
-        //            }
-        //        }
-        //        else if (timecriteria != null)
-        //        {
-        //            sql = $"Select * from reservations where ReservationId = '{idcriteria}' and Time = '{timecriteria}';";
-        //        }
-        //        else
-        //        {
-        //            sql = $"Select * from reservations where ReservationId = '{idcriteria}';";
-        //        }
-        //    }
-        //    else if (namecriteria != null)
-        //    {
-        //        if (timecriteria != null)
-        //        {
-        //            sql = $"Select * from reservations where ReservationName = '{namecriteria}' and Time = '{timecriteria}';"; 
-        //        }
-        //        else
-        //        {
-        //            sql = $"Select * from reservations where ReservationName = '{namecriteria}' ;";
-        //        }
-        //    }
-        //    else if (timecriteria != null)
-        //    {
-        //        sql = $"Select * from reservations where Time = '{timecriteria}';";
-        //    }
-
-        //    MySqlCommand command = new MySqlCommand(sql, connection);
-        //    MySqlDataReader reader = command.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        string id = reader.GetString(0);
-        //        string name = reader.GetString(1);
-        //        string size = reader.GetString(2);
-        //        string date = reader.GetString(3);
-        //        string time = reader.GetString(4);
+        public Reservation GetReservation(string reservationId)
+        {
+            Reservation selectedReservation = null;
+            connection.Open();
+            string sql = $"Select * from reservations where ReservationId = '{reservationId}'";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string id = reader.GetString(0);
+                string name = reader.GetString(1);
+                string size = reader.GetString(2);
+                string date = reader.GetString(3);
+                string time = reader.GetString(4);
 
 
 
 
-        //        newReservation = new Reservation(id,name,size,date,time);
-        //        reservationList.Add(newReservation);
-        //    }
-        //    connection.Close();
-        //    return reservationList;
-        //}
+                selectedReservation = new Reservation(id, name, size, date, time);
 
-        //public Reservation GetReservation(string reservationId)
-        //{
-        //    Reservation selectedReservation = null;
-        //    connection.Open();
-        //    string sql = $"Select * from reservations where ReservationId = '{reservationId}'";
-        //    MySqlCommand command = new MySqlCommand(sql, connection);
-        //    MySqlDataReader reader = command.ExecuteReader();
-        //    while (reader.Read())
-        //    {
-        //        string id = reader.GetString(0);
-        //        string name = reader.GetString(1);
-        //        string size = reader.GetString(2);
-        //        string date = reader.GetString(3);
-        //        string time = reader.GetString(4);
-
-
-
-
-        //        selectedReservation = new Reservation(id, name, size, date, time);
-
-        //    }
-        //    connection.Close();
-        //    return selectedReservation;
-
-
+            }
+            connection.Close();
+            return selectedReservation;
+        }
 
         public void RemoveReservation(string reservationId)
         {

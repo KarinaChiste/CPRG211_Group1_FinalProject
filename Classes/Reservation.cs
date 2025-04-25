@@ -1,23 +1,84 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using CPRG211_Group1_FinalProject.Exceptions;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
     public class Reservation
     {
-        public string Name { get; set; }
-        public string GroupSize { get; set; }
-        public string Time {  get; set; }
-        public string Date { get; set; }
-        public string ReservationID { get; set; }
+        private string reservationId;
+        private string name;
+        private string groupSize;
+        private string date;
+        private string time;
 
-        public Reservation(string reservationID, string name, string groupSize, string date, string time)
+        public string ReservationId
         {
-            ReservationID = reservationID;
+            get => reservationId;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Reservation ID:");
+                }
+                reservationId = value;
+            }
+        }
+
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Name:");
+                }
+                name = value;
+            }
+        }
+
+        public string GroupSize
+        {
+            get => groupSize;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Group Size:");
+                }
+                groupSize = value;
+            }
+        }
+
+        public string Date
+        {
+            get => date;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Date:");
+                }
+                date = value;
+            }
+        }
+
+        public string Time
+        {
+            get => time;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Time:");
+                }
+                time = value;
+            }
+        }
+
+        public Reservation(string reservationId, string name, string groupSize, string date, string time)
+        {
+            ReservationId = reservationId;
             Name = name;
             GroupSize = groupSize;
             Date = date;
@@ -27,7 +88,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public override string ToString()
         {
-            return $"{ReservationID}, {Name}, Group Size: {GroupSize}, {Date}, {Time}";
+            return $"{ReservationId}, {Name}, {GroupSize}, {Date}, {Time}";
         }
     }
 }

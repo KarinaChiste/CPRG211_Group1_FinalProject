@@ -16,7 +16,7 @@
 	
 	<div style="width: 30%;">
 		<label>Item Type:</label>
-		<select class="form-control" style="width: 100%;">
+		<select class="form-control" style="width: 100%;" @bind="type">
 			<option value="">Select Type</option>
 			<option>Appetizer</option>
 			<option>Main</option>
@@ -37,12 +37,12 @@
 @* dropdown list *@
 <div class="form-group pt-3">
 	<select class="form-select" @onchange="MenuItemClick">
-
+		<option>Select Menu Item...</option>
 		@foreach (MenuItem item in menuItems)
 		{
 			if (chosenItem == 1)
 			{
-				<option selected value="@item"> @item.ToString() </option>
+				<option selected value="@item">@item.ToString()</option>
 			}
 			else
 			{
@@ -67,20 +67,19 @@
 	</div>
 
 	<div style="padding-top:10px">
-		<label>Item Price: </label> <br />
-		<input type="text" placeholder="Item Price" style="width:100%" readonly value="@itemPrice"/>
+		<label>Item Type: </label> <br />
+		<input type="text" placeholder="Item Type" style="width:100%" readonly value="@itemType" />
 	</div>
 
 	<div style="padding-top:10px; padding-bottom:30px">
-		<label>Item Type: </label> <br/>
-		<input type="text" placeholder="Item Type" style="width:100%" readonly value="@itemType" />
+		<label>Item Price: </label> <br />
+		<input type="text" placeholder="Item Price" style="width:100%" readonly value="@itemPrice"/>
 	</div>
 </div>
 
 <h3 style="text-align: center;">Manage Menu</h3>
-
 @* add and remove buttons *@
-<form class="d-flex gap-4" style="padding-bottom: 10px; padding-top: 10px;">
+<form class="d-flex gap-4" style="padding-bottom: 10px;">
 	<a href="/additem" class="btn btn-primary w-100" style="white-space: nowrap;">
 		Add New Item
 	</a>
@@ -89,9 +88,10 @@
 		Edit Item
 	</a> *@
 
-	<a href="/removeitem" class="btn btn-primary w-100" style="white-space: nowrap;">
+	<button class="btn btn-danger w-100" style="white-space: nowrap;" @onclick="DeleteMenuItem">
 		Remove Current Item
-	</a>
+	</button>
+
 </form>
 
 
@@ -102,8 +102,8 @@
 
 	private string itemId;
 	private string itemName;
-	private string itemPrice;
 	private string itemType;
+	private string itemPrice;
 
 	public int chosenItem = 1;
 	public string[] menuItemDetails;
@@ -114,11 +114,11 @@
 
 	private void FindMenuItem()
 	{
-		// if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
-		// {
-		// 	menuItems.Clear();
-		// 	return;
-		// }
+		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
+		{
+			// menuItems.Clear();
+			return;
+		}
 		// menuItems = database.GetMenuItems().Where(item =>
 		// 		(string.IsNullOrWhiteSpace(id) || item.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
 		// 				(string.IsNullOrWhiteSpace(name) || item.ItemName.Equals(name, StringComparison.OrdinalIgnoreCase)) &&
@@ -126,7 +126,7 @@
 		// 				).ToList();
 		// if(menuItems.Count != 0)
 		// {
-		// 	ItemSet(menuItems[menuItems.Count - 1].ToString());
+		// 	MenuSet(menuItems[menuItems.Count - 1].ToString());
 		// }
 
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
@@ -145,11 +145,11 @@
 		{
 			type = null;
 		}
-		// menuItems = database.GetMenuItems(id, name, type);
-		// if (menuItems.Count != 0)
-		// {
-		// 	MenuSet(menuItems[menuItems.Count - 1].ToString());
-		// }
+		menuItems = database.GetMenuItems(id, name, type);
+		if (menuItems.Count != 0)
+		{
+			MenuSet(menuItems[menuItems.Count - 1].ToString());
+		}
 	}
 
 	public void MenuItemClick(ChangeEventArgs arg1)
@@ -173,10 +173,10 @@
 		}
 	}
 
-	// public void DeleteMenuItem()
-	// {
-	// 	database.RemoveMenuItem(itemId);
-	// }
+	public void DeleteMenuItem()
+	{
+		database.RemoveMenuItem(itemId);
+	}
 
 }
 
