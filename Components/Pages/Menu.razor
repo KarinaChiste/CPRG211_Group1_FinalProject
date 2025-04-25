@@ -37,7 +37,7 @@
 @* dropdown list *@
 <div class="form-group pt-3">
 	<select class="form-select" @onchange="MenuItemClick">
-
+		<option>Select Menu Item...</option>
 		@foreach (MenuItem item in menuItems)
 		{
 			if (chosenItem == 1)
@@ -78,9 +78,8 @@
 </div>
 
 <h3 style="text-align: center;">Manage Menu</h3>
-
 @* add and remove buttons *@
-<form class="d-flex gap-4" style="padding-bottom: 10px; padding-top: 10px;">
+<form class="d-flex gap-4" style="padding-bottom: 10px;">
 	<a href="/additem" class="btn btn-primary w-100" style="white-space: nowrap;">
 		Add New Item
 	</a>
@@ -89,9 +88,10 @@
 		Edit Item
 	</a> *@
 
-	<a href="/removeitem" class="btn btn-primary w-100" style="white-space: nowrap;">
+	<button class="btn btn-danger w-100" style="white-space: nowrap;" @onclick="DeleteMenuItem">
 		Remove Current Item
-	</a>
+	</button>
+
 </form>
 
 
@@ -173,7 +173,7 @@
 		}
 	}
 
-	public void DeleteEmployee()
+	public void DeleteMenuItem()
 	{
 		database.RemoveMenuItem(itemId);
 	}
