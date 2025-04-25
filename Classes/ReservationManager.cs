@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //creates reservations
     class ReservationManager
     {
         public static List<Reservation> reservations = new List<Reservation>();

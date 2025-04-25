@@ -38,7 +38,7 @@
 @* dropdown list *@
 <div class="form-group pt-3">
 	<select class="form-select" @onchange="MenuItemClick">
-		<option>Select Menu Item...</option>
+		@* <option>Select Menu Item...</option> *@
 		@foreach (MenuItem item in menuItems)
 		{
 			if (chosenItem == 1)

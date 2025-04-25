@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //Creates Employee with Front of House Type
     class FrontOfHouseStaff : Employee
     {
         public FrontOfHouseStaff(string employeeId, string employeeFirstName, string employeeLastName, string position, string salary, string startDate, string hours, string employeeType) : base(employeeId, employeeFirstName, employeeLastName, position, salary, startDate, hours, employeeType)

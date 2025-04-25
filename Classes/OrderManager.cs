@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //NOT IMPLEMENTED
     internal class OrderManager
     {
         public static void GetOrders()

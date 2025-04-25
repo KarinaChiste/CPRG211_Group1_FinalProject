@@ -3,6 +3,7 @@ using CPRG211_Group1_FinalProject.Exceptions;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //Creates reservation objects and validates the inputs
     public class Reservation
     {
         private string reservationId;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CPRG211_Group1_FinalProject.Exceptions;
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //creates menu items
     class MenuManager
     {
         public static List<MenuItem> menuItems = new List<MenuItem>();

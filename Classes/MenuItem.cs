@@ -7,6 +7,7 @@ using CPRG211_Group1_FinalProject.Exceptions;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //Creates abstract class for menu items and validates all inputs
     public abstract class MenuItem
     {
         private string itemId;

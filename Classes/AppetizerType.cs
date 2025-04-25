@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //Creates Menu Item with Appetizer Type
     class AppetizerType : MenuItem
     {
         public AppetizerType(string itemId, string itemName, string price, string itemType) : base(itemId, itemName, price, itemType)

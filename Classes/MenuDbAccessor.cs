@@ -8,6 +8,7 @@ using MySqlConnector;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //connects menu information to the database
     public class MenuDbAccessor : IDatabase
     {
         protected MySqlConnection connection;
@@ -46,8 +47,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public void AddMenuItem(MenuItem item)
         {
-            //if (item == null)
-            //    throw new ArgumentNullException("All fields must be filled.");
+            
 
             connection.Open();
             string insertsql = $"Insert into menu(ItemId, ItemName, ItemType, Price) values ('{item.ItemId}', '{item.ItemName}', '{item.ItemType}', '{item.Price}');";

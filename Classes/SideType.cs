@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //Create Menu Item with Side Type
     class SideType : MenuItem
     {
         public SideType(string itemId, string itemName, string price, string itemType) : base(itemId, itemName, price, itemType)

@@ -8,6 +8,7 @@ using MySqlConnector;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //Connects reservations to the database
     public class ReservationDbAccessor : IDatabase
     {
         protected MySqlConnection connection;

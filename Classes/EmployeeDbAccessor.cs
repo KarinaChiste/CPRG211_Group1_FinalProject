@@ -10,6 +10,7 @@ using MySqlConnector;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //connects employee information to the database
     public class EmployeeDbAccessor:IDatabase
     {
         protected MySqlConnection connection;
@@ -104,7 +105,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 sql = $"Select * from staff where EmployeeType = '{typecriteria}';";
             }
-                //sql = $"Select * from staff;";
+              
             MySqlCommand command = new MySqlCommand( sql, connection);
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -119,7 +120,7 @@ namespace CPRG211_Group1_FinalProject.Classes
                 string employeeType = reader.GetString(7);
 
 
-                //Employee newEmployee = EmployeeManager.CreateEmployee(id, first, last, position, salary, start, hours, employeeType);
+                
                 if (employeeType == "Kitchen Staff")
                 {
                     newEmployee = new KitchenStaff(id, first, last, position, salary, start, hours, employeeType);

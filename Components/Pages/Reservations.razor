@@ -28,7 +28,7 @@
 @* reservation dropdown list *@
 <div class="form-group pt-3">
 	<select class="form-select" @onchange="ReservationClick">
-		<option>Select Reservation...</option>
+		@* <option>Select Reservation...</option> *@
 		@foreach (Reservation reservation in reservations)
 		{
 			if (chosenReservation == 1)

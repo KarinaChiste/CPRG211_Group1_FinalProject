@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_FinalProject.Classes
 {
+    //Displays orders (NOT FULLY IMPLEMENTED)
     internal class Order
     {
         string OrderNum {  get; set; }
