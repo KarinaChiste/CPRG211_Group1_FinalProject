@@ -6,17 +6,20 @@
 @* reservation search input *@
 <form class="d-flex gap-4">
 	<div style="width: 30%;">
-		<label for="name">Name:</label>
-		<input type="text" class="form-control" id="name" />
+		<label for="name">ID:</label>
+		<input type="text" class="form-control" id="id" @bind="id" />
 	</div>
-
+	<div style="width: 30%;">
+		<label for="name">Name:</label>
+		<input type="text" class="form-control" id="name" @bind="name" />
+	</div>
 	<div style="width: 30%;">
 		<label for="time">Time:</label>
-		<input type="text" class="form-control" id="time" />
+		<input type="text" class="form-control" id="time" @bind="time" />
 	</div>
 
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
-		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
+		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;" @onclick="findReservation">
 			Find Reservation
 		</button>
 	</div>
@@ -24,9 +27,20 @@
 
 @* reservation dropdown list *@
 <div class="form-group pt-3">
-	<select class="form-select">
-		<option>Select Reservation...</option>
-		@* Add select logic here *@
+	<select class="form-select" @onchange="ReservationClick">
+		<option>Select Employee...</option>
+		@foreach (Reservation reservation in reservations)
+		{
+			if (chosenReservation == 1)
+			{
+				<option selected value="@reservation"> @reservation.ToString() </option>
+			}
+			else
+			{
+				<option value="@reservation">@reservation.ToString()</option>
+			}
+		}
+
 	</select>
 </div>
 
@@ -73,6 +87,7 @@
 
 
 @code {
+	private string id;
 	private string name;
 	private string time;
 
@@ -88,9 +103,57 @@
 	private List<Reservation> reservations = new List<Reservation>();
 	private ReservationDbAccessor database = new ReservationDbAccessor();
 
+	private void findReservation()
+	{
+		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(time))
+		{
+			return;
+		}
+		if (string.IsNullOrWhiteSpace(id))
+		{
+			id = null;
+		}
+		if (string.IsNullOrWhiteSpace(name))
+		{
+			name = null;
+		}
+		if (string.IsNullOrWhiteSpace(time))
+		{
+			time = null;
+		}
+		reservations = database.GetReservations(id, name, time);
+		if (reservations.Count != 0)
+		{
+			ReservationSet(reservations[reservations.Count - 1].ToString());
+		}
+	}
+
+	public void ReservationSet(string theReservation)
+	{
+		if (theReservation.Length != 0)
+		{
+			reservationDetails = theReservation.Split(",");
+			reservationId = reservationDetails[0];
+			reservationName = reservationDetails[1];
+			reservationSize = reservationDetails[2];
+			reservationDate = reservationDetails[3];
+			reservationTime = reservationDetails[4];
+
+		}
+	}
+
+	public void ReservationClick(ChangeEventArgs arg1)
+	{
+		if (arg1.Value is not null)
+		{
+			string myReservation = (string)arg1.Value;
+			ReservationSet(myReservation);
+		}
+	}
+
 	private void DeleteReservation()
 	{
 		database.RemoveReservation(reservationId);
 	}
- 
+
 }
