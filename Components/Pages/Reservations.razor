@@ -28,12 +28,16 @@
 @* reservation dropdown list *@
 <div class="form-group pt-3">
 	<select class="form-select" @onchange="ReservationClick">
-		<option>Select Employee...</option>
+		<option>Select Reservation...</option>
 		@foreach (Reservation reservation in reservations)
 		{
 			if (chosenReservation == 1)
 			{
 				<option selected value="@reservation"> @reservation.ToString() </option>
+			}
+			else if (chosenReservation == 2)
+			{
+				<option selected value="">Select Reservation...</option>
 			}
 			else
 			{
