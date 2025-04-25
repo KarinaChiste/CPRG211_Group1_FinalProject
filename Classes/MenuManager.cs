@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CPRG211_Group1_FinalProject.Exceptions;
 namespace CPRG211_Group1_FinalProject.Classes
 {
     class MenuManager
@@ -50,7 +50,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             }
             else
             {
-                throw new ArgumentException("Item type not selected or invalid. Please choose a valid menu item type.");
+                throw new TypeNotSelectedException();
             }
 
             MenuDbAccessor db = new MenuDbAccessor();
