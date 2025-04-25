@@ -34,7 +34,7 @@
 @* dropdown list *@
 <div class="form-group pt-3">
 	<select class="form-select" @onchange="EmployeeClick">
-
+		<option>Select Employee...</option>
 		@foreach (Employee employee in employees)
 		{
 			if (chosenEmployee == 1)

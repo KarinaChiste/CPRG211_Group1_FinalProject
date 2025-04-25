@@ -1,51 +1,99 @@
 ﻿@page "/reservations"
 @using CPRG211_Group1_FinalProject.Classes
 
-<h3>Reservations</h3>
+<h3 style="text-align: center;">Search Reservations</h3>
 
-@*finding reservation*@
-
-<div class="text-center mt-5">
-	<h5>Find Reservation</h5>
-</div>
-
-<div class="d-flex flex-column gap-3">
-	<div class="form-group">
+@* reservation search input *@
+<form class="d-flex gap-4">
+	<div style="width: 30%;">
 		<label for="name">Search Name:</label>
 		<input type="text" class="form-control" id="name" />
 	</div>
 
-	<div class="form-group">
+	<div style="width: 30%;">
 		<label for="time">Search Time:</label>
 		<input type="text" class="form-control" id="time" />
 	</div>
 
-	<div>
-		<button type="button" class="btn btn-primary w-100">
+	<div class="align-self-end flex-grow-1" style="width: 190px;">
+		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
 			Find Reservation
 		</button>
 	</div>
+</form>
+
+@* reservation dropdown list *@
+<div class="form-group pt-3">
+	<select class="form-select">
+		<option>Select Reservation...</option>
+		@* Add select logic here *@
+	</select>
 </div>
 
-@*reservation dropdown*@
+@* searched reservation info *@
+<div style="display: flex; flex-direction: column; align-items: center;">
+	<div style="padding-top:10px">
+		<label>Reservation ID:</label> <br />
+		<input type="text" placeholder="Reservation ID" style="width:100%" readonly value="@reservationId" />
+	</div>
 
-<div class="form-group mt-3">
-	<select class="form-select"></select>
+	<div style="padding-top:10px">
+		<label>Name:</label> <br />
+		<input type="text" placeholder="Name" style="width:100%" readonly value="@name" />
+	</div>
+
+	<div style="padding-top:10px">
+		<label>Group Size:</label> <br />
+		<input type="text" placeholder="Group Size" style="width:100%" readonly value="@groupSize" />
+	</div>
+
+	<div style="padding-top:10px">
+		<label>Date:</label> <br />
+		<input type="text" placeholder="Date" style="width:100%" readonly value="@date" />
+	</div>
+
+	<div style="padding-top:10px; padding-bottom:30px">
+		<label>Time:</label> <br />
+		<input type="text" placeholder="Time" style="width:100%" readonly value="@time" />
+	</div>
 </div>
 
-@*buttons*@
+<h3 style="text-align: center;">Manage Reservations</h3>
 
-<div class="d-flex justify-content-center mt-4">
-	<a href="/addreservations" class="btn btn-primary" style="min-width: 200px;">
-		Add Reservation
+@* add and remove buttons *@
+<form class="d-flex gap-4" style="padding-bottom: 10px;">
+	<a href="/addreservations" class="btn btn-primary w-100" style="white-space: nowrap;">
+		Add New Reservation
 	</a>
-</div>
 
-<div class="d-flex justify-content-center mt-4">
-	<a href="/removereservations" class="btn btn-primary" style="min-width: 200px;">
-	Remove Reservation
-	</a>
-</div>
+	<button class="btn btn-danger w-100" style="white-space: nowrap;" @onclick="DeleteReservation">
+		Remove Current Reservation
+	</button>
+</form>
+
+
 @code {
-   
+	private string reservationId;
+	private string name;
+	private string groupSize;
+	private string date;
+	private string time;
+
+	private string foundReservationId;
+	private string foundName;
+	private string foundGroupSize;
+	private string foundDate;
+	private string foundTime;
+
+	public int chosenReservation = 1;
+	public string[] reservationDetails;
+
+	private List<Reservation> reservations = new List<Reservation>();
+	private ReservationDbAccessor database = new ReservationDbAccessor();
+
+	private void DeleteReservation()
+	{
+		database.RemoveReservation(foundReservationId);
+	}
+ 
 }
