@@ -16,7 +16,7 @@
 	
 	<div style="width: 30%;">
 		<label>Item Type:</label>
-		<select class="form-control" style="width: 100%;">
+		<select class="form-control" style="width: 100%;" @bind="type">
 			<option value="">Select Type</option>
 			<option>Appetizer</option>
 			<option>Main</option>
@@ -116,18 +116,18 @@
 	{
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
 		{
-			menuItems.Clear();
+			// menuItems.Clear();
 			return;
 		}
-		menuItems = database.GetMenuItems().Where(item =>
-				(string.IsNullOrWhiteSpace(id) || item.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
-						(string.IsNullOrWhiteSpace(name) || item.ItemName.Equals(name, StringComparison.OrdinalIgnoreCase)) &&
-						(string.IsNullOrWhiteSpace(type) || item.GetMenuItemType().Equals(type, StringComparison.OrdinalIgnoreCase))
-						).ToList();
-		if(menuItems.Count != 0)
-		{
-			MenuSet(menuItems[menuItems.Count - 1].ToString());
-		}
+		// menuItems = database.GetMenuItems().Where(item =>
+		// 		(string.IsNullOrWhiteSpace(id) || item.ItemId.Equals(id, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(name) || item.ItemName.Equals(name, StringComparison.OrdinalIgnoreCase)) &&
+		// 				(string.IsNullOrWhiteSpace(type) || item.GetMenuItemType().Equals(type, StringComparison.OrdinalIgnoreCase))
+		// 				).ToList();
+		// if(menuItems.Count != 0)
+		// {
+		// 	MenuSet(menuItems[menuItems.Count - 1].ToString());
+		// }
 
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
 		{
@@ -168,8 +168,8 @@
 			menuItemDetails = theMenuItem.Split(",");
 			itemId = menuItemDetails[0];
 			itemName = menuItemDetails[1];
-			itemPrice = menuItemDetails[2];
-			itemType = menuItemDetails[3];
+			itemType = menuItemDetails[2];
+			itemPrice = menuItemDetails[3];
 		}
 	}
 
