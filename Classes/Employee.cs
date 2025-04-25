@@ -24,6 +24,22 @@ namespace CPRG211_Group1_FinalProject.Classes
                 {
                     throw new EmptyFieldException("Employee ID");
                 }
+
+                if (!int.TryParse(value, out int parsedId))
+                {
+                    throw new InvalidFormatException("EmployeeID must be a numeric value.");
+                }
+
+                if (parsedId < 0)
+                {
+                    throw new InvalidFormatException("Employee ID cannot be negative.");
+                }
+
+                if (value.Length != 6)
+                {
+                    throw new InvalidFormatException("Employee ID must be exactly 6 digits long.");
+                }
+
                 employeeId = value;
             }
         }
