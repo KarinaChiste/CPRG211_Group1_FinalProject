@@ -1,5 +1,6 @@
 ﻿@page "/employees"
 @using CPRG211_Group1_FinalProject.Classes
+@inject IJSRuntime JSRuntime
 <h3 style="text-align: center;">Search Employees</h3>
 
 <form class="d-flex gap-4">
@@ -33,13 +34,18 @@
 
 @* dropdown list *@
 <div class="form-group pt-3">
-	<select class="form-select" @onchange="EmployeeClick">
-		<option>Select Employee...</option>
+	<select class="form-select" @onchange="EmployeeClick" >
+		@* <option>Select Employee...</option> *@
 		@foreach (Employee employee in employees)
 		{
 			if (chosenEmployee == 1)
 			{
+
 				<option selected value="@employee"> @employee.ToString() </option>
+			}
+			else if (chosenEmployee == 2)
+			{
+				<option selected value="">Select Employee...</option>
 			}
 			else
 			{
@@ -100,18 +106,18 @@
 <form class="d-flex gap-4" style="padding-bottom: 10px;">
 
 	<a href="/addemployees" class="btn btn-primary w-100" style="white-space: nowrap; ">
-			Add New Employee
+		Add New Employee
 	</a>
 
 
-@* 	<a href="/editemployees">
+	@* 	<a href="/editemployees">
 		<button type="button" class="btn btn-primary w-100"
 		style="white-space: nowrap; ">
 			Edit Employee
 		</button>
 	</a>
  *@
-@* 	<a href="/removeemployees">
+	@* 	<a href="/removeemployees">
 		<button type="button" class="btn btn-primary w-100"
 		style="white-space: nowrap;" >
 			Remove Employee
@@ -121,8 +127,16 @@
 	<button class="btn btn-danger w-100" style="white-space: nowrap;" @onclick="DeleteEmployee">
 		Remove Current Employee
 	</button>
+
 </form>
 
+@* <dialog> *@
+@* 	<p>Testing</p> *@
+@* 	<form action="/" method="post"> *@
+@* 		<button>Confirm</button> *@
+@* 		<button>Cancel</button> *@
+@* 	</form> *@
+@* </dialog> *@
 
 
 @code {
@@ -153,6 +167,16 @@
 
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(employeefirstname) && string.IsNullOrWhiteSpace(type))
 		{
+			employeeid = null;
+			firstname = null;
+			lastname = null;
+			position = null;
+			startdate = null;
+			salary = null;
+			hours = null;
+			stafftype = null;
+			chosenEmployee = 2;
+
 			return;
 		}
 		if (string.IsNullOrWhiteSpace(id))
@@ -172,6 +196,17 @@
 		{
 			EmployeeSet(employees[employees.Count - 1].ToString());
 		}
+		else
+		{
+			employeeid = null;
+			firstname = null;
+			lastname = null;
+			position = null;
+			startdate = null;
+			salary = null;
+			hours = null;
+			stafftype = null;
+		}
 	}
 
 	public void EmployeeClick(ChangeEventArgs arg1)
@@ -181,6 +216,7 @@
 			string myEmployee = (string)arg1.Value;
 			EmployeeSet(myEmployee);
 		}
+
 	}
 
 	public void EmployeeSet(string theEmployee)
@@ -200,9 +236,18 @@
 		}
 	}
 
-	public void DeleteEmployee()
+	public async void DeleteEmployee()
 	{
-		database.RemoveEmployee(employeeid);
+
+		
+		bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Employee", $"Delete employee with ID: {employeeid}", "Confirm", "Cancel");
+		
+		if(confirm)
+		{
+			database.RemoveEmployee(employeeid);
+		}
 	}
+
+	
 
 }
