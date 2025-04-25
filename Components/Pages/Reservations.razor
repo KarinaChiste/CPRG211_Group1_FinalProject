@@ -46,6 +46,16 @@
 	Remove Reservation
 	</a>
 </div>
+
 @code {
+	private string reservationID;
+	private string name;
+	private string groupSize;
+	private string date;
+	private string time;
+
+	private List<Reservation> reservations = new List<Reservation>();
+	private ReservationManager reservationManager = new ReservationManager();
+	private ReservationDbAccessor database = new ReservationDbAccessor();
    
 }
