@@ -10,24 +10,24 @@
 </div>
 <form class="d-flex gap-4">
 	<div class="form-group flex-grow-1">
-		<label for="code">Name:</label>
-		<input type="text" class="form-control" id="name">
+		<label for="reservationID">Reservation ID:</label>
+		<input type="text" class="form-control" id="id" @bind="reservationID">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="airline">Group Size:</label>
-		<input type="text" class="form-control" id="size">
+		<label for="name">Name:</label>
+		<input type="text" class="form-control" id="name" @bind="name">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="name">Time:</label>
-		<input type="text" class="form-control" id="time">
+		<label for="groupsize">Group Size:</label>
+		<input type="text" class="form-control" id="size" @bind="groupSize">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="name">Date:</label>
-		<input type="text" class="form-control" id="date">
+		<label for="date">Date:</label>
+		<input type="text" class="form-control" id="date" @bind="date">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="name">Reservation ID:</label>
-		<input type="text" class="form-control" id="id">
+		<label for="time">Time:</label>
+		<input type="text" class="form-control" id="time" @bind="time">
 	</div>
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
 		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
@@ -37,5 +37,23 @@
 </form>
 
 @code {
+	private string reservationID;
+	private string name;
+	private string groupSize;
+	private string date;
+	private string time;
    
+	public void MakeReservation()
+	{
+		try
+		{
+			ReservationManager.makeReservation(string reservationID, string name, string groupSize, string date, string time);
+			success = "Reservation added";
+		}
+		catch (Exception ex)
+		{
+			success = ex.Message;
+		}
+
+	}
 }

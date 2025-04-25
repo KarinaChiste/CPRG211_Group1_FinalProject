@@ -45,14 +45,14 @@ namespace CPRG211_Group1_FinalProject.Classes
             connection.Close();
         }
 
-        //public void AddReservation(Reservation reservation)
-        //{
-        //    connection.Open();
-        //    string insertsql = $"Insert into reservations(ReservationId, ReservationName, GroupSize, Date, Time) values ('{reservation.ReservationId}', '{reservation.Name}', '{reservation.GroupSize}', '{reservation.Date}', '{reservation.Time}');";
-        //    MySqlCommand insertCommand = new MySqlCommand(insertsql, connection);
-        //    insertCommand.ExecuteNonQuery();
-        //    connection.Close();
-        //}
+        public void AddReservation(Reservation reservation)
+        {
+            connection.Open();
+            string insertsql = $"Insert into reservations(ReservationId, ReservationName, GroupSize, Date, Time) values ('{reservation.ReservationID}', '{reservation.Name}', '{reservation.GroupSize}', '{reservation.Date}', '{reservation.Time}');";
+            MySqlCommand insertCommand = new MySqlCommand(insertsql, connection);
+            insertCommand.ExecuteNonQuery();
+            connection.Close();
+        }
 
         //public List<Reservation> GetReservations(string idcriteria = null, string namecriteria = null, string timecriteria = null)
         //{

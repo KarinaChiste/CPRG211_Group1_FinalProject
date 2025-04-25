@@ -15,19 +15,19 @@ namespace CPRG211_Group1_FinalProject.Classes
         public string Date { get; set; }
         public string ReservationID { get; set; }
 
-        public Reservation(string name, string groupSize, string time, string date, string reservationID)
+        public Reservation(string reservationID, string name, string groupSize, string date, string time)
         {
+            ReservationID = reservationID;
             Name = name;
             GroupSize = groupSize;
-            Time = time;
             Date = date;
-            ReservationID = reservationID;
+            Time = time;
 
         }
 
         public override string ToString()
         {
-            return $"{Name}, Group Size: {GroupSize}, {Time}, {Date}, {ReservationID}";
+            return $"{ReservationID}, {Name}, Group Size: {GroupSize}, {Date}, {Time}";
         }
     }
 }
