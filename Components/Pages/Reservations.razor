@@ -73,17 +73,14 @@
 
 
 @code {
-	private string reservationId;
 	private string name;
-	private string groupSize;
-	private string date;
 	private string time;
 
-	private string foundReservationId;
-	private string foundName;
-	private string foundGroupSize;
-	private string foundDate;
-	private string foundTime;
+	private string reservationId;
+	private string reservationName;
+	private string reservationSize;
+	private string reservationDate;
+	private string reservationTime;
 
 	public int chosenReservation = 1;
 	public string[] reservationDetails;
@@ -93,7 +90,7 @@
 
 	private void DeleteReservation()
 	{
-		database.RemoveReservation(foundReservationId);
+		database.RemoveReservation(reservationId);
 	}
  
 }
