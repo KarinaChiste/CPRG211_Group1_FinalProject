@@ -151,9 +151,6 @@ namespace CPRG211_Group1_FinalProject.Classes
                 string type = reader.GetString(2);
                 string price = reader.GetString(3);
 
-
-
-
                 if (type == "Appetizer")
                 {
                     selectedItem = new AppetizerType(id, name, type, price);

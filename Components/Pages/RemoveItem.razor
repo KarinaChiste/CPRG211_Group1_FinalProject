@@ -26,7 +26,7 @@
 
 <div class=" flex-grow-1" style="width: 190px; padding-top:10px">
 	<button type="button" class="btn btn-primary w-100"
-			style="white-space: nowrap;"> @* @onclick="MakeMenuItem" *@
+			style="white-space: nowrap;" @onclick="DeleteMenuItem">
 		Remove Item
 	</button>
 
@@ -41,17 +41,17 @@
 
 	public string success = string.Empty;
 
-	// public void DeleteMenuItem()
-	// {
-	// 	try
-	// 	{
-	// 		MenuManager.RemoveMenuItem(itemId, itemName, itemPrice, itemType);
-	// 		success = "Menu item deleted!";
-	// 	}
-	// 	catch (Exception ex)
-	// 	{
-	// 		success = ex.Message;
-	// 	}
+	public void DeleteMenuItem()
+	{
+		try
+		{
+			MenuManager.DeleteMenuItem(itemId);
+			success = "Menu item deleted!";
+		}
+		catch (Exception ex)
+		{
+			success = ex.Message;
+		}
 
-	// }
+	}
 }
