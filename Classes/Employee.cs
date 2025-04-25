@@ -27,7 +27,7 @@ namespace CPRG211_Group1_FinalProject.Classes
 
                 if (!int.TryParse(value, out int parsedId))
                 {
-                    throw new InvalidFormatException("EmployeeID must be a numeric value.");
+                    throw new InvalidFormatException("Employee ID must be a numeric value.");
                 }
 
                 if (parsedId < 0)
