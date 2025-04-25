@@ -47,7 +47,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         public void AddMenuItem(MenuItem item)
         {
             if (item == null)
-                throw new ArgumentNullException(nameof(item), "Item cannot be null.");
+                throw new ArgumentNullException("All fields must be filled.");
 
             connection.Open();
             string insertsql = $"Insert into menu(ItemId, ItemName, ItemType, Price) values ('{item.ItemId}', '{item.ItemName}', '{item.ItemType}', '{item.Price}');";
