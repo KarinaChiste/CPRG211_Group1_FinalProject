@@ -54,6 +54,16 @@ namespace CPRG211_Group1_FinalProject.Classes
             connection.Close();
         }
 
+        public void RemoveReservation(string reservationID)
+        {
+            connection.Open();
+            string sql = $"DELETE FROM menu WHERE ReservationID = '{reservationID}'";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            command.ExecuteNonQuery();
+            connection.Close();
+
+        }
+
         //public List<Reservation> GetReservations(string idcriteria = null, string namecriteria = null, string timecriteria = null)
         //{
         //    Reservation newReservation;

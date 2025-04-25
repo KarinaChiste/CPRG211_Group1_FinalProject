@@ -27,5 +27,11 @@ namespace CPRG211_Group1_FinalProject.Classes
             db.AddReservation(res);
             return res;
         }
+
+        public static void DeleteReservation(string resewrvationID)
+        {
+            MenuDbAccessor db = new MenuDbAccessor();
+            db.RemoveReservation(reservationID);
+        }
     }
 }
