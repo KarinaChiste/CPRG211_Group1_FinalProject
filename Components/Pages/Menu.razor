@@ -44,7 +44,7 @@
 			{
 				<option selected value="@item">@item.ToString()</option>
 			}
-			else if (chosenItem == 2 )
+			else if (chosenItem == 2)
 			{
 				<option selected value="">Select Menu Item...</option>
 			}
@@ -138,10 +138,10 @@
 		// 	MenuSet(menuItems[menuItems.Count - 1].ToString());
 		// }
 
-		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
-		{
-			return;
-		}
+		// if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
+		// {
+		// 	return;
+		// }
 		if (string.IsNullOrWhiteSpace(id))
 		{
 			id = null;
@@ -158,6 +158,13 @@
 		if (menuItems.Count != 0)
 		{
 			MenuSet(menuItems[menuItems.Count - 1].ToString());
+		}
+		else
+		{
+			itemId = null;
+			itemName = null;
+			itemType = null;
+			itemPrice = null;
 		}
 	}
 
