@@ -19,8 +19,24 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Item ID:");
+                    throw new EmptyFieldException("Item ID");
                 }
+
+                if (!int.TryParse(value, out int parsedId))
+                {
+                    throw new InvalidFormatException("Item ID must be a numeric value.");
+                }
+
+                if (parsedId < 0)
+                {
+                    throw new InvalidFormatException("Item ID cannot be negative.");
+                }
+
+                if (value.Length != 6)
+                {
+                    throw new InvalidFormatException("Item ID must be exactly 6 digits long.");
+                }
+
                 itemId = value;
             } 
         }
@@ -30,7 +46,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Item Name:");
+                    throw new EmptyFieldException("Item Name");
                 }
                 itemName = value;
             }
@@ -38,15 +54,19 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public string ItemType { get; set; }
 
-        public string Price
-        {
-            get => price;
+        public string Price { get => price;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Price:");
+                    throw new EmptyFieldException("Price");
                 }
+
+                if (!decimal.TryParse(value, out decimal parsedPrice) || parsedPrice <= 0)
+                {
+                    throw new InvalidFormatException("Price must be a valid positive number.");
+                }
+
                 price = value;
             }
         }

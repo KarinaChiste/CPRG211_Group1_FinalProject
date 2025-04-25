@@ -18,7 +18,22 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Reservation ID:");
+                    throw new EmptyFieldException("Reservation ID");
+                }
+
+                if (!int.TryParse(value, out int parsedId))
+                {
+                    throw new InvalidFormatException("Reservation ID must be a numeric value.");
+                }
+
+                if (parsedId < 0)
+                {
+                    throw new InvalidFormatException("Reservation ID cannot be negative.");
+                }
+
+                if (value.Length != 6)
+                {
+                    throw new InvalidFormatException("Reservation ID must be exactly 6 digits long.");
                 }
                 reservationId = value;
             }
@@ -31,7 +46,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Name:");
+                    throw new EmptyFieldException("Name");
                 }
                 name = value;
             }
@@ -44,7 +59,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Group Size:");
+                    throw new EmptyFieldException("Group Size");
                 }
                 groupSize = value;
             }
@@ -57,7 +72,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Date:");
+                    throw new EmptyFieldException("Date");
                 }
                 date = value;
             }
@@ -70,7 +85,7 @@ namespace CPRG211_Group1_FinalProject.Classes
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new EmptyFieldException("Time:");
+                    throw new EmptyFieldException("Time");
                 }
                 time = value;
             }
