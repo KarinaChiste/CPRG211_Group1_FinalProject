@@ -11,8 +11,8 @@ namespace CPRG211_Group1_FinalProject.Classes
     {
         private string itemId;
         private string itemName;
-        private string price;
         private string itemType;
+        private string price;
 
         public string ItemId { get => itemId; 
             set
@@ -36,7 +36,11 @@ namespace CPRG211_Group1_FinalProject.Classes
             }
         }
 
-        public string Price { get => price;
+        public string ItemType { get; set; }
+
+        public string Price
+        {
+            get => price;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -47,19 +51,17 @@ namespace CPRG211_Group1_FinalProject.Classes
             }
         }
 
-        public string ItemType { get; set; }
-
-        public MenuItem(string itemId, string itemName, string price, string itemType)
+        public MenuItem(string itemId, string itemName, string itemType, string price)
         {
             ItemId = itemId;
             ItemName = itemName;
-            Price = price;
             ItemType = itemType;
+            Price = price;
         }
 
         public override string ToString()
         {
-            return $"{ItemId}, {ItemName}, {Price}, {ItemType}";
+            return $"{ItemId}, {ItemName}, {ItemType}, {Price}";
         }
 
         public abstract string GetMenuItemType();

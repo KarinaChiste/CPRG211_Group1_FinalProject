@@ -67,13 +67,13 @@
 	</div>
 
 	<div style="padding-top:10px">
-		<label>Item Price: </label> <br />
-		<input type="text" placeholder="Item Price" style="width:100%" readonly value="@itemPrice"/>
+		<label>Item Type: </label> <br />
+		<input type="text" placeholder="Item Type" style="width:100%" readonly value="@itemType" />
 	</div>
 
 	<div style="padding-top:10px; padding-bottom:30px">
-		<label>Item Type: </label> <br/>
-		<input type="text" placeholder="Item Type" style="width:100%" readonly value="@itemType" />
+		<label>Item Price: </label> <br />
+		<input type="text" placeholder="Item Price" style="width:100%" readonly value="@itemPrice"/>
 	</div>
 </div>
 
@@ -102,8 +102,8 @@
 
 	private string itemId;
 	private string itemName;
-	private string itemPrice;
 	private string itemType;
+	private string itemPrice;
 
 	public int chosenItem = 1;
 	public string[] menuItemDetails;
