@@ -103,12 +103,16 @@
 		</button>
 	</a>
 
-	<a href="/removeemployees">
+@* 	<a href="/removeemployees">
 		<button type="button" class="btn btn-primary w-100"
 		style="white-space: nowrap;" >
 			Remove Employee
 		</button>
-	</a>
+	</a> *@
+
+	<button class="btn btn-danger w-100" style="white-space: nowrap;" @onclick="DeleteEmployee">
+		Remove Current Item
+	</button>
 </form>
 
 
