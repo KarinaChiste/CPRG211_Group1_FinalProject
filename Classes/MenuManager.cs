@@ -15,43 +15,50 @@ namespace CPRG211_Group1_FinalProject.Classes
             return menuItems;
         }
 
-        public static MenuItem CreateMenuItem(string itemId, string itemName, string price, string itemType)
+        public static MenuItem CreateMenuItem(string itemId, string itemName, string itemType, string price)
         {
             MenuItem item = null;
 
             if (itemType == "Appetizer")
             {
-                item = new AppetizerType(itemId, itemName, price, itemType);
+                item = new AppetizerType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
-            if (itemType == "Main")
+            else if (itemType == "Main")
             {
-                item = new MainType(itemId, itemName, price, itemType);
+                item = new MainType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
-            if (itemType == "Side")
+            else if (itemType == "Side")
             {
-                item = new SideType(itemId, itemName, price, itemType);
+                item = new SideType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
-            if (itemType == "Dessert")
+            else if (itemType == "Dessert")
             {
-                item = new DessertType(itemId, itemName, price, itemType);
+                item = new DessertType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
-            if (itemType == "Drink")
+            else if (itemType == "Drink")
             {
-                item = new DrinkType(itemId, itemName, price, itemType);
+                item = new DrinkType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
+            //THROW EXCEPTION IN ELSE STATEMENT
 
-            //RestaurantDbAccessor db = new RestaurantDbAccessor();
-            //db.AddMenuItem(item);
+            MenuDbAccessor db = new MenuDbAccessor();
+            db.AddMenuItem(item);
+           
             return item;
+        }
+        public static void DeleteMenuItem(string itemId)
+        {
+            MenuDbAccessor db = new MenuDbAccessor();
+            db.RemoveMenuItem(itemId);
         }
 
     }
