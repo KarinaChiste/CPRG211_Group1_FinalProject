@@ -46,6 +46,9 @@ namespace CPRG211_Group1_FinalProject.Classes
 
         public void AddMenuItem(MenuItem item)
         {
+            if (item == null)
+                throw new ArgumentNullException("All fields must be filled.");
+
             connection.Open();
             string insertsql = $"Insert into menu(ItemId, ItemName, ItemType, Price) values ('{item.ItemId}', '{item.ItemName}', '{item.ItemType}', '{item.Price}');";
             MySqlCommand insertCommand = new MySqlCommand(insertsql, connection);
@@ -180,7 +183,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         public void RemoveMenuItem(string itemId)
         {
             connection.Open();
-            string sql = $"Select * from menu where ItemId = ' {itemId}'";
+            string sql = $"DELETE FROM menu WHERE ItemId = '{itemId}'";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.ExecuteNonQuery();
             connection.Close();
