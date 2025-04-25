@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CPRG211_Group1_FinalProject.Exceptions;
 namespace CPRG211_Group1_FinalProject.Classes
 {
     class MenuManager
@@ -48,7 +48,10 @@ namespace CPRG211_Group1_FinalProject.Classes
                 item = new DrinkType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
-            //THROW EXCEPTION IN ELSE STATEMENT
+            else
+            {
+                throw new TypeNotSelectedException();
+            }
 
             MenuDbAccessor db = new MenuDbAccessor();
             db.AddMenuItem(item);
