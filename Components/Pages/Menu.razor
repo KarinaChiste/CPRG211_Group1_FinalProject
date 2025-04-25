@@ -13,7 +13,7 @@
 		<label>Item Name:</label>
 		<input class="form-control" type="text" @bind="name"/>
 	</div>
-	
+
 	<div style="width: 30%;">
 		<label>Item Type:</label>
 		<select class="form-control" style="width: 100%;" @bind="type">
@@ -28,7 +28,7 @@
 
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
 		<button type="button" class="btn btn-primary w-100"
-				style="white-space: nowrap;" @onclick="FindMenuItem">
+		style="white-space: nowrap;" @onclick="FindMenuItem">
 			Search Menu
 		</button>
 	</div>
@@ -43,6 +43,10 @@
 			if (chosenItem == 1)
 			{
 				<option selected value="@item">@item.ToString()</option>
+			}
+			else if (chosenItem == 2 )
+			{
+				<option selected value="">Select Menu Item...</option>
 			}
 			else
 			{
@@ -116,6 +120,11 @@
 	{
 		if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(type))
 		{
+			itemId = null;
+			itemName = null;
+			itemType = null;
+			itemPrice = null;
+			chosenItem = 2;
 			// menuItems.Clear();
 			return;
 		}
@@ -173,9 +182,14 @@
 		}
 	}
 
-	public void DeleteMenuItem()
+	public async void DeleteMenuItem()
 	{
-		database.RemoveMenuItem(itemId);
+		bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Menu Item", $"Delete menu item with ID: {itemId}", "Confirm", "Cancel");
+
+		if (confirm)
+		{
+			database.RemoveMenuItem(itemId);
+		}
 	}
 
 }
