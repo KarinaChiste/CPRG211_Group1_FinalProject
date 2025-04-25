@@ -8,6 +8,6 @@ namespace CPRG211_Group1_FinalProject.Exceptions
 {
     public class EmptyFieldException : Exception
     {
-        public EmptyFieldException(string field) : base($"{field} cannot be empty") { }
+        public EmptyFieldException(string field) : base($"{field} cannot be empty or whitespace") { }
     }
 }

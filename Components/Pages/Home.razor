@@ -1,5 +1,21 @@
 ﻿@page "/"
+@using CPRG211_Group1_FinalProject.Classes
 
-<h1>Hello, world!</h1>
+<h1>Ascent</h1>
 
-Welcome to your new app.
+Hello, welcome to the Restaurant Management System!
+
+@code{
+
+	private EmployeeDbAccessor employeeDbAccessor = new EmployeeDbAccessor();
+	private ReservationDbAccessor reservationDbAccessor = new ReservationDbAccessor();
+	private MenuDbAccessor menuDbAccessor = new MenuDbAccessor();
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		employeeDbAccessor.InitializeDatabase();
+		reservationDbAccessor.InitializeDatabase();
+		menuDbAccessor.InitializeDatabase();
+	}
+}
