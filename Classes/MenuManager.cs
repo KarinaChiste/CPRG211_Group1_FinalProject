@@ -25,29 +25,30 @@ namespace CPRG211_Group1_FinalProject.Classes
                 menuItems.Add(item);
             }
 
-            if (itemType == "Main")
+            else if (itemType == "Main")
             {
                 item = new MainType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
-            if (itemType == "Side")
+            else if (itemType == "Side")
             {
                 item = new SideType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
-            if (itemType == "Dessert")
+            else if (itemType == "Dessert")
             {
                 item = new DessertType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
 
-            if (itemType == "Drink")
+            else if (itemType == "Drink")
             {
                 item = new DrinkType(itemId, itemName, itemType, price);
                 menuItems.Add(item);
             }
+            //THROW EXCEPTION IN ELSE STATEMENT
 
             MenuDbAccessor db = new MenuDbAccessor();
             db.AddMenuItem(item);
