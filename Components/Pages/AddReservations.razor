@@ -11,32 +11,52 @@
 @*adding reservation*@
 <form class="d-flex gap-4">
 	<div class="form-group flex-grow-1">
-		<label for="code">Reservation ID:</label>
-		<input class="form-control" placeholder="Reservation ID" id="reservationId">
+		<label for="reservationID">Reservation ID:</label>
+		<input type="text" class="form-control" id="id" @bind="reservationId">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="code">Name:</label>
-		<input class="form-control" placeholder="Name" id="name">
+		<label for="name">Name:</label>
+		<input type="text" class="form-control" id="name" @bind="name">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="airline">Group Size:</label>
-		<input class="form-control" placeholder="Group Size" id="groupSize">
+		<label for="groupsize">Group Size:</label>
+		<input type="text" class="form-control" id="size" @bind="groupSize">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="name">Date:</label>
-		<input class="form-control" placeholder="Date" id="date">
+		<label for="date">Date:</label>
+		<input type="text" class="form-control" id="date" @bind="date">
 	</div>
 	<div class="form-group flex-grow-1">
-		<label for="name">Time:</label>
-		<input class="form-control" placeholder="Time" id="time">
+		<label for="time">Time:</label>
+		<input type="text" class="form-control" id="time" @bind="time">
 	</div>
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
-		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;">
+		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;" @onclick="MakeReservation">
 			Add Reservation
 		</button>
 	</div>
 </form>
+@success
 
 @code {
-   
+	private string reservationId;
+	private string name;
+	private string groupSize;
+	private string date;
+	private string time;
+	public string success = string.Empty;
+
+	public void MakeReservation()
+	{
+		try
+		{
+			ReservationManager.makeReservation(reservationId, name, groupSize, date, time);
+			success = "Reservation added";
+		}
+		catch (Exception ex)
+		{
+			success = ex.Message;
+		}
+
+	}
 }
