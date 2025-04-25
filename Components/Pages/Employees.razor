@@ -1,5 +1,6 @@
 ﻿@page "/employees"
 @using CPRG211_Group1_FinalProject.Classes
+@inject IJSRuntime JSRuntime
 <h3 style="text-align: center;">Search Employees</h3>
 
 <form class="d-flex gap-4">
@@ -126,8 +127,16 @@
 	<button class="btn btn-danger w-100" style="white-space: nowrap;" @onclick="DeleteEmployee">
 		Remove Current Employee
 	</button>
+
 </form>
 
+@* <dialog> *@
+@* 	<p>Testing</p> *@
+@* 	<form action="/" method="post"> *@
+@* 		<button>Confirm</button> *@
+@* 		<button>Cancel</button> *@
+@* 	</form> *@
+@* </dialog> *@
 
 
 @code {
@@ -207,7 +216,7 @@
 			string myEmployee = (string)arg1.Value;
 			EmployeeSet(myEmployee);
 		}
-		
+
 	}
 
 	public void EmployeeSet(string theEmployee)
@@ -227,9 +236,18 @@
 		}
 	}
 
-	public void DeleteEmployee()
+	public async void DeleteEmployee()
 	{
-		database.RemoveEmployee(employeeid);
+
+		
+		bool confirm = await Application.Current.MainPage.DisplayAlert("Delete Employee", $"Delete employee with ID: {employeeid}", "Confirm", "Cancel");
+		
+		if(confirm)
+		{
+			database.RemoveEmployee(employeeid);
+		}
 	}
+
+	
 
 }
