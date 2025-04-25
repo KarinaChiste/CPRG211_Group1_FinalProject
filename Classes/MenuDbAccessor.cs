@@ -47,7 +47,7 @@ namespace CPRG211_Group1_FinalProject.Classes
         public void AddMenuItem(MenuItem item)
         {
             connection.Open();
-            string insertsql = $"Insert into menu(ItemId, ItemName, ItemType, Price) values ('{item.ItemId}', '{item.ItemName}', '{item.ItemType}');";
+            string insertsql = $"Insert into menu(ItemId, ItemName, ItemType, Price) values ('{item.ItemId}', '{item.ItemName}', '{item.ItemType}', '{item.Price}');";
             MySqlCommand insertCommand = new MySqlCommand(insertsql, connection);
             insertCommand.ExecuteNonQuery();
             connection.Close();
