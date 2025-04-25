@@ -1,5 +1,7 @@
 ﻿@page "/addemployees"
 @using CPRG211_Group1_FinalProject.Classes
+@using CPRG211_Group1_FinalProject.Exceptions
+@using MySqlConnector
 
 <a href="/employees" class="btn btn-secondary" style="margin-bottom: 30px;">
 	Back to Main Employees Page
@@ -84,6 +86,18 @@
 		{
 			EmployeeManager.CreateEmployee(employeeid, firstname, lastname, position, salary, startdate, hours, staffType);
 			success = "Employee added!";
+		}
+		catch(MySqlException ex)
+		{
+			if (ex.Message.StartsWith("Duplicate entry"))
+			{
+				DuplicateIdException exc = new DuplicateIdException();
+				success = exc.Message;
+			}
+			else
+			{
+				success = ex.Message;
+			}
 		}
 		catch(Exception ex)
 		{

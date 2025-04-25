@@ -1,5 +1,7 @@
 ﻿@page "/additem"
 @using CPRG211_Group1_FinalProject.Classes
+@using CPRG211_Group1_FinalProject.Exceptions
+@using MySqlConnector
 
 <a href="/menu" class="btn btn-secondary" style="margin-bottom: 30px;">
 	Back to Main Menu Page
@@ -66,6 +68,18 @@
 		{
 			MenuManager.CreateMenuItem(itemId, itemName, itemType, price);
 			success = "Menu item added!";
+		}
+		catch (MySqlException ex)
+		{
+			if (ex.Message.StartsWith("Duplicate entry"))
+			{
+				DuplicateIdException exc = new DuplicateIdException();
+				success = exc.Message;
+			}
+			else
+			{
+				success = ex.Message;
+			}
 		}
 		catch (Exception ex)
 		{
