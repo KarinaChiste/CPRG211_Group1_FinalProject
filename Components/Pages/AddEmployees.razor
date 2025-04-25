@@ -1,60 +1,63 @@
 ﻿@page "/addemployees"
 @using CPRG211_Group1_FinalProject.Classes
 
+<a href="/employees" class="btn btn-secondary" style="margin-bottom: 30px;">
+	Back to Employees Main Page
+</a>
+
 <h3>Add New Employee</h3>
 
-<div style="padding-top:10px">
-	<label>Employee ID: </label> <br />
-	<input type="text" placeholder="Employee ID" style="width:50%" @bind="employeeid" 	/>
+<form class="d-flex flex-wrap gap-4">
+	<div style="width: 30%;">
+		<label>Employee ID:</label>
+		<input class="form-control" placeholder="Employee ID" @bind="employeeid" />
+	</div>
 
-</div>
+	<div style="width: 30%;">
+		<label>First Name:</label>
+		<input class="form-control" placeholder="First Name" @bind="firstname" />
+	</div>
 
-<div style="padding-top:10px">
-	<label>First Name: </label> <br />
-	<input type="text" placeholder="First Name" style="width:50%"  @bind="firstname"/>
-</div>
+	<div style="width: 30%;">
+		<label>Last Name:</label>
+		<input class="form-control" placeholder="Last Name" @bind="lastname" />
+	</div>
 
-<div style="padding-top:10px">
-	<label>Last Name: </label> <br />
-	<input type="text" placeholder="Last Name" style="width:50%"  @bind="lastname"/>
-</div>
+	<div style="width: 30%;">
+		<label>Position:</label>
+		<input class="form-control" placeholder="Position" @bind="position" />
+	</div>
 
-<div style="padding-top:10px">
-	<label>Position: </label> <br />
-	<input type="text" placeholder="Position" style="width:50%" @bind="position" />
-</div>
+	<div style="width: 30%;">
+		<label>Salary:</label>
+		<input class="form-control" placeholder="Salary" @bind="salary" />
+	</div>
 
-<div style="padding-top:10px">
-	<label>Salary: </label> <br />
-	<input type="text" placeholder="Salary" style="width:50%" @bind="salary"/>
-</div>
+	<div style="width: 30%;">
+		<label>Start Date:</label>
+		<input class="form-control" placeholder="Start Date" @bind="startdate" />
+	</div>
 
-<div style="padding-top:10px">
-	<label>Start Date: </label> <br />
-	<input type="text" placeholder="Start Date" style="width:50%" @bind="startdate" />
-</div>
+	<div style="width: 30%;">
+		<label>Hours:</label>
+		<input class="form-control" placeholder="Hours" @bind="hours" />
+	</div>
 
+	<div style="width: 30%;">
+		<label>Staff Type:</label>
+		<select class="form-control" @bind="staffType">
+			<option value="Kitchen Staff">Kitchen Staff</option>
+			<option value="Front of House">Front of House</option>
+		</select>
+	</div>
 
+	<div class="align-self-end flex-grow-1" style="width: 190px;">
+		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;" @onclick="MakeEmployee">
+			Add Employee
+		</button>
+	</div>
+</form>
 
-<div style="padding-top:10px; padding-bottom:20px">
-	<label>Hours: </label> <br />
-	<input type="text" placeholder="Hours" style="width:50%" @bind="hours" />
-</div>
-
-<div style="padding-top:10px;">
-	<select @bind="staffType">
-		<option value="@staffType">Kitchen Staff</option>
-		<option value="@staffType">Front of House</option>
-	</select>
-</div>
-
-<div class=" flex-grow-1" style="width: 190px;margin-bottom:30px">
-	<button type="button" class="btn btn-primary w-100"
-	style="white-space: nowrap;" @onclick="MakeEmployee">
-		Add Employee
-	</button>
-
-</div>
 @success
 
 @code {
