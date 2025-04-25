@@ -106,12 +106,10 @@ namespace CPRG211_Group1_FinalProject.Classes
                 string type = reader.GetString(2);
                 string price = reader.GetString(3);
                 
-
-
                 
                 if (type == "Appetizer")
                 {
-                    newItem = new AppetizerType(id,name,type,price );
+                    newItem = new AppetizerType(id, name, type, price);
 
                 }
                 else if(type == "Dessert")
@@ -121,17 +119,16 @@ namespace CPRG211_Group1_FinalProject.Classes
                 }
                 else if (type == "Drink")
                 {
-                    newItem = new DrinkType(id, name, type, price );
+                    newItem = new DrinkType(id, name, type, price);
                 }
                 else if(type == "Main")
                 {
-                    newItem = new MainType(id, name, type, price );
+                    newItem = new MainType(id, name, type, price);
                 }
                 else
                 {
-                    throw new Exception(); //IMPLEMENT EXCEPTION
+                    throw new InvalidOperationException($"Unknown menu item type: {type}");
                 }
-                    itemList.Add(newItem);
             }
             connection.Close();
             return itemList;
@@ -171,14 +168,14 @@ namespace CPRG211_Group1_FinalProject.Classes
                 }
                 else
                 {
-                    throw new Exception(); //IMPLEMENT EXCEPTION
+                    throw new InvalidOperationException($"Unknown menu item type: {type}");
                 }
 
             }
             connection.Close();
             return selectedItem;
-
         }
+
         public void RemoveMenuItem(string itemId)
         {
             connection.Open();
